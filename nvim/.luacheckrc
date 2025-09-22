@@ -1,5 +1,5 @@
-std = "lua51+vim"
-globals = {
+std = "luajit"
+read_globals = {
   "vim",
 }
 ignore = {
