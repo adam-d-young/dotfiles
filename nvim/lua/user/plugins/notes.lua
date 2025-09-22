@@ -15,15 +15,10 @@ return {
       "nvim-telescope/telescope-media-files.nvim",
     },
     opts = function()
-      -- Use absolute paths directly - avoid vim.fn.expand() issues
+      -- Use vim.fn.expand() for better portability and Neovim integration
       local env_home = vim.env.TELEKASTEN_HOME or vim.env.ZK_HOME
-      local home = env_home or os.getenv("HOME") .. "/.zk"
+      local home = env_home and vim.fn.expand(env_home) or vim.fn.expand("~/.zk")
       local templates_path = home .. "/templates"
-      
-      -- Debug environment variables and paths
-      vim.notify("DEBUG - env_home: " .. tostring(env_home), vim.log.levels.INFO)
-      vim.notify("DEBUG - home: " .. home, vim.log.levels.INFO)
-      vim.notify("DEBUG - templates_path: " .. templates_path, vim.log.levels.INFO)
       
       return {
         home = home,
@@ -39,15 +34,6 @@ return {
       }
     end,
     config = function(_, opts)
-      -- Debug telekasten configuration
-      vim.notify("Telekasten config - home: " .. opts.home, vim.log.levels.INFO)
-      vim.notify("Telekasten config - templates: " .. opts.templates, vim.log.levels.INFO)
-      vim.notify("Telekasten config - daily template: " .. opts.template_new_daily, vim.log.levels.INFO)
-      
-      -- Check if templates exist
-      vim.notify("Looking for daily template at: " .. opts.template_new_daily, vim.log.levels.INFO)
-      vim.notify("Daily template exists: " .. tostring(vim.fn.filereadable(opts.template_new_daily) == 1), vim.log.levels.INFO)
-      
       -- Ensure templates directory exists (templates should be set up by setup script)
       local templates_dir = opts.templates
       if vim.fn.isdirectory(templates_dir) == 0 then
