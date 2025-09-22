@@ -1,7 +1,7 @@
 ### Neovim Configuration (nvim)
 
 A modular, lazy-loaded Neovim setup with two profiles using NVIM_APPNAME:
-- nvim-dev: General development (base UX, Treesitter, LSP, completion)
+- nvim (default): General development (base UX, Treesitter, LSP, completion)
 - nvim-notes: Notes-focused (adds Telekasten and related tools)
 
 Plugins are managed by lazy.nvim and install automatically on first launch.
@@ -21,15 +21,17 @@ Plugins are managed by lazy.nvim and install automatically on first launch.
 scripts/setup.sh
 ```
 This will:
-- Create aliases in your shell rc: `nvim-dev`, `nvim-notes`, `nvim-learn`
-- Link this config into per-profile directories: `~/.config/nvim-dev`, `~/.config/nvim-notes`
+- Create aliases in your shell rc: `nvim` (default dev, no alias needed), `nvim-notes`, `nvim-learn`
+- Link this config into per-profile directories: `~/.config/nvim` (default), `~/.config/nvim-notes`
 - Check optional CLIs (glow, viu/catimg, clipboard tools)
 
 2) Launch a profile:
 ```bash
-nvim-dev     # development profile
+nvim         # development profile (default)
 nvim-notes   # notes profile (Telekasten enabled)
 ```
+
+Neovide (GUI): if installed, use `neovide` for the default profile and `neovide-notes` for notes.
 
 ### Telekasten vault location
 You can point Telekasten at any directory by setting one of these environment variables before launching Neovim:
@@ -50,7 +52,7 @@ The config uses templates from:
 - `stdpath('config')/templates` (this repo's `templates/` folder once linked by setup)
 
 ### Profiles explained
-- nvim-dev
+- nvim (default)
   - Loads: base UX (tokyonight, lualine, neo-tree, telescope, trouble, gitsigns, which-key, indent guides), coding stack (Treesitter, LSP via mason + lspconfig, nvim-cmp, formatting/linting via none-ls)
 - nvim-notes
   - Everything in nvim-dev, plus Telekasten, calendar, media previews

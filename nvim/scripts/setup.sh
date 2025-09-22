@@ -20,9 +20,17 @@ setup_aliases() {
   shell_rc="$HOME/.zshrc"
   if [[ -n "${BASH:-}" ]]; then shell_rc="$HOME/.bashrc"; fi
 
+  # Notes profile alias (CLI)
   grep -q "NVIM_APPNAME=nvim-notes" "$shell_rc" || echo "alias nvim-notes='NVIM_APPNAME=nvim-notes nvim'" >>"$shell_rc"
-  grep -q "NVIM_APPNAME=nvim-dev" "$shell_rc" || echo "alias nvim-dev='NVIM_APPNAME=nvim-dev nvim'" >>"$shell_rc"
+
+  # Learn profile alias (single-file config)
   grep -q "nvim -u \$KICKSTART_PATH/init.lua" "$shell_rc" || echo "alias nvim-learn='nvim -u $KICKSTART_PATH/init.lua'" >>"$shell_rc"
+
+  # Neovide aliases (optional GUI), only if neovide present
+  if command -v neovide >/dev/null 2>&1; then
+    grep -q "NVIM_APPNAME=nvim-notes neovide" "$shell_rc" || echo "alias neovide-notes='NVIM_APPNAME=nvim-notes neovide'" >>"$shell_rc"
+    grep -q "neovide -- -u \$KICKSTART_PATH/init.lua" "$shell_rc" || echo "alias neovide-learn='neovide -- -u $KICKSTART_PATH/init.lua'" >>"$shell_rc"
+  fi
 }
 
 link_profile() {
@@ -64,8 +72,8 @@ main() {
   info "Setting up aliases"
   setup_aliases
 
-  info "Linking dev profile"
-  link_profile "nvim-dev"
+  info "Linking default dev profile to ~/.config/nvim"
+  link_profile "nvim"
 
   info "Linking notes profile"
   link_profile "nvim-notes"
@@ -74,7 +82,7 @@ main() {
   check_clipboard_tools
   check_glow_cli
 
-  info "Done. Open with 'nvim-dev' or 'nvim-notes'"
+  info "Done. Open with 'nvim' (dev) or 'nvim-notes' (notes). For GUI, use 'neovide' or 'neovide-notes' if available."
 }
 
 main "$@"
