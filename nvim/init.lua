@@ -9,3 +9,11 @@ require("user.core.keymaps")
 
 -- Plugin manager and plugins
 require("user.lazy")
+
+-- LSP setup (after plugins are loaded)
+vim.api.nvim_create_autocmd("VimEnter", {
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  callback = function()
+    require("user.core.lsp").setup()
+  end,
+})
