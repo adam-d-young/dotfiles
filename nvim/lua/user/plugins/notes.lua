@@ -15,7 +15,9 @@ return {
       "nvim-telescope/telescope-media-files.nvim",
     },
     opts = function()
-      local home = vim.fn.expand("~/.zk")
+      -- Allow overriding Telekasten home via env vars
+      local env_home = vim.env.TELEKASTEN_HOME or vim.env.ZK_HOME or nil
+      local home = env_home and vim.fn.expand(env_home) or vim.fn.expand("~/.zk")
       return {
         home = home,
         dailies = home .. "/daily",
