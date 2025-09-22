@@ -50,9 +50,13 @@ setup_aliases() {
 link_profile() {
   local name="$1"
   local target_dir="$HOME/.config/$1"
+  local source_dir="$(dirname "$0")/.."
 
   mkdir -p "$target_dir"
-  rsync -a --delete --exclude ".git" --exclude "tests" --exclude "scripts" ./ "$target_dir"/
+  if ! rsync -a --delete --exclude ".git" --exclude "tests" --exclude "scripts" "$source_dir"/ "$target_dir"/; then
+    warn "Failed to sync profile $name to $target_dir"
+    return 1
+  fi
 }
 
 check_optional_media_previewer() {
@@ -79,6 +83,10 @@ check_glow_cli() {
     info "Glow CLI found for markdown preview"
   else
     warn "Glow CLI not found; install from https://github.com/charmbracelet/glow"
+    # Don't fail in CI environment
+    if [[ "${CI:-}" == "true" ]]; then
+      info "Continuing in CI environment without glow"
+    fi
   fi
 }
 
@@ -95,6 +103,10 @@ check_marksman() {
         warn "On Linux, download from: https://github.com/artempyanykh/marksman/releases"
         ;;
     esac
+    # Don't fail in CI environment
+    if [[ "${CI:-}" == "true" ]]; then
+      info "Continuing in CI environment without marksman"
+    fi
   fi
 }
 
