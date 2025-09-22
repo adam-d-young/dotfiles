@@ -84,16 +84,11 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       local none = require("null-ls")
-      local sources = {
-        none.builtins.formatting.stylua,
-      }
-      
-      -- Add luacheck if available
-      if none.builtins.diagnostics.luacheck then
-        table.insert(sources, none.builtins.diagnostics.luacheck.with({ extra_args = { "--globals", "vim" } }))
-      end
-      
-      none.setup({ sources = sources })
+      none.setup({
+        sources = {
+          none.builtins.formatting.stylua,
+        },
+      })
     end,
   },
 }
