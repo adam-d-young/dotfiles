@@ -23,14 +23,22 @@ return {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     cmd = "Neotree",
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", "MunifTanjim/nui.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim",
+    },
     opts = {},
   },
 
   -- Telescope and dependencies
   { "nvim-lua/plenary.nvim", lazy = true },
   { "nvim-telescope/telescope.nvim", version = "0.1.*", cmd = "Telescope" },
-  { "nvim-telescope/telescope-fzf-native.nvim", build = "make", cond = vim.fn.executable("make") == 1 },
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    build = "make",
+    cond = vim.fn.executable("make") == 1,
+  },
 
   -- Diagnostics list
   { "folke/trouble.nvim", cmd = { "Trouble" }, opts = {} },

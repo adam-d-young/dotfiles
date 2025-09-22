@@ -27,17 +27,23 @@ map("n", "<leader>fr", function()
   local ok, ext = pcall(function()
     return require("telescope").extensions.frecency
   end)
-  if ok and ext then ext.frecency() end
+  if ok and ext then
+    ext.frecency()
+  end
 end, "Telescope: frecency")
 map("n", "<leader>tb", function()
   local ok, ext = pcall(function()
     return require("telescope").extensions.bibtex
   end)
-  if ok and ext then ext.bibtex() end
+  if ok and ext then
+    ext.bibtex()
+  end
 end, "Telescope: bibtex")
 map("n", "<leader>ts", function()
   local ok, builtin = pcall(require, "telescope.builtin")
-  if ok then builtin.symbols({}) end
+  if ok then
+    builtin.symbols({})
+  end
 end, "Telescope: symbols")
 
 -- File explorer (Neo-tree)
@@ -60,13 +66,19 @@ map("n", "<leader>mp", ":Glow<CR>", "Markdown preview (Glow)")
 -- Telekasten (these will be no-ops unless notes profile/plugins are enabled)
 map("n", "<leader>zn", function()
   local ok, tk = pcall(require, "telekasten")
-  if ok then tk.new_note() end
+  if ok then
+    tk.new_note()
+  end
 end, "Telekasten: new note")
 map("n", "<leader>zd", function()
   local ok, tk = pcall(require, "telekasten")
-  if ok then tk.goto_today() end
+  if ok then
+    tk.goto_today()
+  end
 end, "Telekasten: today")
 map("n", "<leader>zz", function()
   local ok, tk = pcall(require, "telekasten")
-  if ok then tk.panel() end
+  if ok then
+    tk.panel()
+  end
 end, "Telekasten: panel")

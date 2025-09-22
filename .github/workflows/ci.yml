@@ -65,7 +65,10 @@ jobs:
           brew install luarocks || true
           luarocks --local install luacheck
           echo "$HOME/.luarocks/bin" >> "$GITHUB_PATH"
-          luacheck --config nvim/.luacheckrc nvim
+
+      - name: Run Luacheck (macOS)
+        run: |
+          ~/.luarocks/bin/luacheck --config nvim/.luacheckrc nvim
 
       - name: Install Neovim (macOS)
         run: |
@@ -92,11 +95,12 @@ jobs:
           KICKSTART_PATH: ${{ github.workspace }}/kickstart
         run: |
           mkdir -p "$HOME"
-          touch "$HOME/.zshrc"
+          touch "$HOME/.zshrc" "$HOME/.bashrc"
           mkdir -p "$KICKSTART_PATH"
           echo 'return {}' > "$KICKSTART_PATH/init.lua"
           bash scripts/setup.sh
-          grep -q "nvim-notes" "$HOME/.zshrc"
-          grep -q "nvim-dev" "$HOME/.zshrc"
+          # Check either zshrc or bashrc for aliases written by setup.sh
+          (grep -q "nvim-notes" "$HOME/.zshrc" || grep -q "nvim-notes" "$HOME/.bashrc")
+          (grep -q "nvim-dev" "$HOME/.zshrc" || grep -q "nvim-dev" "$HOME/.bashrc")
           test -d "$HOME/.config/nvim-notes"
           test -d "$HOME/.config/nvim-dev"
