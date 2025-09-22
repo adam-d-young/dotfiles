@@ -31,9 +31,9 @@ setup_aliases() {
   # Aliases to add
   local a_notes="alias nvim-notes='NVIM_APPNAME=nvim-notes nvim'"
   local a_learn="alias nvim-learn='nvim -u \$KICKSTART_PATH/init.lua'"
-  local a_neovide_notes="alias neovide-notes='NVIM_APPNAME=nvim-notes neovide'"
-  local a_neovide_learn="alias neovide-learn='neovide -- -u \$KICKSTART_PATH/init.lua'"
-  local a_tk="alias tk='NVIM_APPNAME=nvim-notes neovide'"
+  local a_neovide_notes="alias neovide-notes='NVIM_APPNAME=nvim-notes neovide &'"
+  local a_neovide_learn="alias neovide-learn='neovide -- -u \$KICKSTART_PATH/init.lua &'"
+  local a_tk="alias tk='NVIM_APPNAME=nvim-notes neovide &'"
 
   local f
   for f in "${rc_files[@]}"; do
