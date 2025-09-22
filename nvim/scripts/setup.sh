@@ -98,6 +98,21 @@ check_marksman() {
   fi
 }
 
+setup_telekasten_templates() {
+  local telekasten_home="${TELEKASTEN_HOME:-${ZK_HOME:-$HOME/.zk}}"
+  local templates_dir="$telekasten_home/templates"
+  local source_templates="$(dirname "$0")/../templates"
+  
+  if [[ -d "$source_templates" ]]; then
+    info "Setting up telekasten templates in $templates_dir"
+    mkdir -p "$templates_dir"
+    cp -r "$source_templates"/* "$templates_dir/"
+    info "Telekasten templates installed successfully"
+  else
+    warn "Source templates directory not found: $source_templates"
+  fi
+}
+
 main() {
   info "Setting up aliases"
   setup_aliases
@@ -112,6 +127,7 @@ main() {
   check_clipboard_tools
   check_glow_cli
   check_marksman
+  setup_telekasten_templates
 
   info "Done. Open with 'nvim' (dev) or 'nvim-notes' (notes). For GUI, use 'neovide' or 'neovide-notes' if available."
 }
