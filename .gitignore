@@ -1,0 +1,16 @@
+# System-specific troubleshooting and development files
+nvim/troubleshooting.md
+
+# Test files and temporary directories
+nvim/.tests/
+tests/
+
+# Editor and OS files
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Logs and temporary files
+*.log
+*.tmp

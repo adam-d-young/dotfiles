@@ -83,7 +83,12 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      local none = require("none-ls")
+      local ok, none = pcall(require, "none-ls")
+      if not ok then
+        vim.notify("none-ls not available", vim.log.levels.WARN)
+        return
+      end
+      
       none.setup({
         sources = {
           none.builtins.formatting.stylua,
