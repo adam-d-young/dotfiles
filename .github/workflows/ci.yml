@@ -18,7 +18,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           version: v0.20.0
-          args: --check .
+          args: --check --config-path nvim/.stylua.toml nvim
 
       - name: Install Lua and Luacheck
         run: |
@@ -26,7 +26,7 @@ jobs:
           sudo apt-get install -y luarocks
           sudo luarocks install luacheck
       - name: Run Luacheck
-        run: luacheck .
+        run: luacheck --config nvim/.luacheckrc nvim
 
       - name: Install Neovim
         uses: rhysd/action-setup-vim@v1
@@ -58,14 +58,14 @@ jobs:
         run: |
           brew update
           brew install stylua || true
-          stylua --check .
+          stylua --check --config-path nvim/.stylua.toml nvim
 
       - name: Install luacheck (macOS)
         run: |
           brew install luarocks || true
           luarocks --local install luacheck
-          echo "$(luarocks path --bin)" >> "$GITHUB_PATH"
-          luacheck .
+          echo "$HOME/.luarocks/bin" >> "$GITHUB_PATH"
+          luacheck --config nvim/.luacheckrc nvim
 
       - name: Install Neovim (macOS)
         run: |

@@ -1,5 +1,3 @@
-local profile = require("user.utils.profile")
-
 return {
   -- Treesitter
   {
