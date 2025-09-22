@@ -77,16 +77,17 @@ return {
     end,
   },
 
-  -- Formatting & linting via null-ls successor
+  -- Formatting & linting via none-ls (null-ls successor)
   {
     "nvimtools/none-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      local none = require("null-ls")
+      local none = require("none-ls")
       none.setup({
         sources = {
           none.builtins.formatting.stylua,
+          none.builtins.diagnostics.luacheck.with({ extra_args = { "--globals", "vim" } }),
         },
       })
     end,
