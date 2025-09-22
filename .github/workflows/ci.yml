@@ -1,0 +1,102 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Stylua
+        uses: JohnnyMorganz/stylua-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: v0.20.0
+          args: --check .
+
+      - name: Install Lua and Luacheck
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y luarocks
+          sudo luarocks install luacheck
+      - name: Run Luacheck
+        run: luacheck .
+
+      - name: Install Neovim
+        uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: v0.10.1
+
+      - name: Fetch plenary.nvim for tests
+        run: |
+          mkdir -p nvim/tests/site/pack/vendor/start
+          git clone --depth 1 https://github.com/nvim-lua/plenary.nvim nvim/tests/site/pack/vendor/start/plenary.nvim
+
+      - name: Run tests (Plenary)
+        working-directory: nvim
+        env:
+          NVIM_APPNAME: nvim-dev
+        run: |
+          nvim --headless -u tests/minimal_init.lua \
+            -c "PlenaryBustedDirectory tests/ {minimal_init = 'tests/minimal_init.lua'}" \
+            -c "qa!"
+
+  macos-validate:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Stylua (macOS)
+        run: |
+          brew update
+          brew install stylua || true
+          stylua --check .
+
+      - name: Install luacheck (macOS)
+        run: |
+          brew install luarocks || true
+          luarocks --local install luacheck
+          echo "$(luarocks path --bin)" >> "$GITHUB_PATH"
+          luacheck .
+
+      - name: Install Neovim (macOS)
+        run: |
+          brew install neovim || true
+
+      - name: Fetch plenary.nvim for tests
+        run: |
+          mkdir -p nvim/tests/site/pack/vendor/start
+          git clone --depth 1 https://github.com/nvim-lua/plenary.nvim nvim/tests/site/pack/vendor/start/plenary.nvim
+
+      - name: Run tests (Plenary, macOS)
+        working-directory: nvim
+        env:
+          NVIM_APPNAME: nvim-dev
+        run: |
+          nvim --headless -u tests/minimal_init.lua \
+            -c "PlenaryBustedDirectory tests/ {minimal_init = 'tests/minimal_init.lua'}" \
+            -c "qa!"
+
+      - name: Validate setup.sh behavior on macOS
+        working-directory: nvim
+        env:
+          HOME: ${{ runner.temp }}/fakehome
+          KICKSTART_PATH: ${{ github.workspace }}/kickstart
+        run: |
+          mkdir -p "$HOME"
+          touch "$HOME/.zshrc"
+          mkdir -p "$KICKSTART_PATH"
+          echo 'return {}' > "$KICKSTART_PATH/init.lua"
+          bash scripts/setup.sh
+          grep -q "nvim-notes" "$HOME/.zshrc"
+          grep -q "nvim-dev" "$HOME/.zshrc"
+          test -d "$HOME/.config/nvim-notes"
+          test -d "$HOME/.config/nvim-dev"
