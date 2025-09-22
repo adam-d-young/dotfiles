@@ -16,6 +16,8 @@ This document outlines the guiding principles for the Neovim configuration proje
 
 5.  **Test-Driven Development (TDD)**: All custom Lua functions (e.g., in a `utils` or `helpers` module) **must** be developed with tests first using the `plenary.nvim` testing library. Configuration is code, and it should be reliable.
 
+6.  **Prefer Native APIs**: Always use native Neovim and Lua functions when available instead of external plugins or deprecated APIs. This ensures better performance, stability, and future compatibility. Examples: use `vim.lsp.start()` instead of `require('lspconfig')`, `vim.keymap.set()` instead of `vim.api.nvim_set_keymap()`, and `vim.opt` instead of `vim.cmd('set')`.
+
 ---
 
 ## Coding Standards

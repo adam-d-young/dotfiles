@@ -14,28 +14,68 @@ return {
     end,
   },
 
-  -- LSP
+  -- LSP (using native vim.lsp.start() instead of deprecated nvim-lspconfig)
   {
-    "neovim/nvim-lspconfig",
+    "williamboman/mason.nvim",
+    build = ":MasonUpdate",
     event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      {
-        "williamboman/mason.nvim",
-        build = ":MasonUpdate",
-        opts = {},
-      },
-      { "williamboman/mason-lspconfig.nvim", opts = {} },
-      { "folke/neodev.nvim", opts = {} },
-    },
+    opts = {},
+  },
+  {
+    "folke/neodev.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {},
+  },
+  {
+    "hrsh7th/cmp-nvim-lsp",
+    event = "InsertEnter",
     config = function()
-      local lspconfig = require("lspconfig")
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-      -- Basic servers
-      local servers = { "lua_ls", "marksman" }
-      for _, server in ipairs(servers) do
-        lspconfig[server].setup({ capabilities = capabilities })
+      -- Store capabilities globally for use in LSP setup
+      vim.g.lsp_capabilities = capabilities
+    end,
+  },
+  {
+    -- Native LSP setup using vim.lsp.start()
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      local capabilities = vim.g.lsp_capabilities or vim.lsp.protocol.make_client_capabilities()
+
+      -- Setup LSP servers using native vim.lsp.start()
+      local function setup_lsp_server(name, cmd, config)
+        local client_config = vim.tbl_deep_extend("force", {
+          capabilities = capabilities,
+          on_attach = function(_, bufnr)
+            -- Set up keymaps when LSP attaches
+            local opts = { buffer = bufnr, silent = true }
+            vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+            vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+            vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+            vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+            vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+            vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+            vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, opts)
+          end,
+        }, config or {})
+
+        vim.lsp.start({
+          name = name,
+          cmd = cmd,
+          root_dir = vim.fs.dirname(vim.fs.find({ ".git" }, { upward = true })[1]),
+        }, client_config)
+      end
+
+      -- Setup lua_ls
+      setup_lsp_server("lua_ls", { "lua-language-server" })
+
+      -- Setup marksman if available
+      if vim.fn.executable("marksman") == 1 then
+        setup_lsp_server("marksman", { "marksman", "server" })
+      else
+        vim.notify("Marksman LSP not found. Install with: brew install marksman", vim.log.levels.WARN)
       end
     end,
   },
@@ -45,7 +85,6 @@ return {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "saadparwaiz1/cmp_luasnip",

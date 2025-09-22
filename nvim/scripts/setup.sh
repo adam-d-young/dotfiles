@@ -16,26 +16,8 @@ info() { echo -e "\033[1;34m==>\033[0m $*"; }
 warn() { echo -e "\033[1;33m==>\033[0m $*"; }
 
 setup_aliases() {
-  # Determine candidate rc files; prefer current shell, but update both bash and zsh idempotently
-  local rc_files=()
-  if [[ -n "${SHELL:-}" ]]; then
-    case "$SHELL" in
-      */zsh) rc_files+=("$HOME/.zshrc") ;;
-      */bash) rc_files+=("$HOME/.bashrc") ;;
-    esac
-  fi
-  rc_files+=("$HOME/.zshrc" "$HOME/.bashrc")
-
-  # De-duplicate rc files
-  local unique=()
-  local f
-  for f in "${rc_files[@]}"; do
-    local seen=0
-    local uf
-    for uf in "${unique[@]}"; do [[ "$uf" == "$f" ]] && seen=1 && break; done
-    [[ $seen -eq 0 ]] && unique+=("$f")
-  done
-  rc_files=("${unique[@]}")
+  # Update both zsh and bash rc files idempotently
+  local rc_files=("$HOME/.zshrc" "$HOME/.bashrc")
 
   local add_line
   add_line() {
@@ -48,16 +30,19 @@ setup_aliases() {
 
   # Aliases to add
   local a_notes="alias nvim-notes='NVIM_APPNAME=nvim-notes nvim'"
-  local a_learn="alias nvim-learn='nvim -u $KICKSTART_PATH/init.lua'"
+  local a_learn="alias nvim-learn='nvim -u \$KICKSTART_PATH/init.lua'"
   local a_neovide_notes="alias neovide-notes='NVIM_APPNAME=nvim-notes neovide'"
-  local a_neovide_learn="alias neovide-learn='neovide -- -u $KICKSTART_PATH/init.lua'"
+  local a_neovide_learn="alias neovide-learn='neovide -- -u \$KICKSTART_PATH/init.lua'"
+  local a_tk="alias tk='NVIM_APPNAME=nvim-notes neovide'"
 
+  local f
   for f in "${rc_files[@]}"; do
     add_line "$f" "$a_notes"
     add_line "$f" "$a_learn"
     if command -v neovide >/dev/null 2>&1; then
       add_line "$f" "$a_neovide_notes"
       add_line "$f" "$a_neovide_learn"
+      add_line "$f" "$a_tk"
     fi
   done
 }
@@ -97,6 +82,22 @@ check_glow_cli() {
   fi
 }
 
+check_marksman() {
+  if command -v marksman >/dev/null 2>&1; then
+    info "Marksman LSP found for markdown support"
+  else
+    warn "Marksman LSP not found; install from https://github.com/artempyanykh/marksman"
+    case "$OS" in
+      Darwin)
+        warn "On macOS, install with: brew install marksman"
+        ;;
+      Linux)
+        warn "On Linux, download from: https://github.com/artempyanykh/marksman/releases"
+        ;;
+    esac
+  fi
+}
+
 main() {
   info "Setting up aliases"
   setup_aliases
@@ -110,6 +111,7 @@ main() {
   check_optional_media_previewer
   check_clipboard_tools
   check_glow_cli
+  check_marksman
 
   info "Done. Open with 'nvim' (dev) or 'nvim-notes' (notes). For GUI, use 'neovide' or 'neovide-notes' if available."
 }
