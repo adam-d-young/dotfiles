@@ -16,21 +16,50 @@ info() { echo -e "\033[1;34m==>\033[0m $*"; }
 warn() { echo -e "\033[1;33m==>\033[0m $*"; }
 
 setup_aliases() {
-  local shell_rc
-  shell_rc="$HOME/.zshrc"
-  if [[ -n "${BASH:-}" ]]; then shell_rc="$HOME/.bashrc"; fi
-
-  # Notes profile alias (CLI)
-  grep -q "NVIM_APPNAME=nvim-notes" "$shell_rc" || echo "alias nvim-notes='NVIM_APPNAME=nvim-notes nvim'" >>"$shell_rc"
-
-  # Learn profile alias (single-file config)
-  grep -q "nvim -u \$KICKSTART_PATH/init.lua" "$shell_rc" || echo "alias nvim-learn='nvim -u $KICKSTART_PATH/init.lua'" >>"$shell_rc"
-
-  # Neovide aliases (optional GUI), only if neovide present
-  if command -v neovide >/dev/null 2>&1; then
-    grep -q "NVIM_APPNAME=nvim-notes neovide" "$shell_rc" || echo "alias neovide-notes='NVIM_APPNAME=nvim-notes neovide'" >>"$shell_rc"
-    grep -q "neovide -- -u \$KICKSTART_PATH/init.lua" "$shell_rc" || echo "alias neovide-learn='neovide -- -u $KICKSTART_PATH/init.lua'" >>"$shell_rc"
+  # Determine candidate rc files; prefer current shell, but update both bash and zsh idempotently
+  local rc_files=()
+  if [[ -n "${SHELL:-}" ]]; then
+    case "$SHELL" in
+      */zsh) rc_files+=("$HOME/.zshrc") ;;
+      */bash) rc_files+=("$HOME/.bashrc") ;;
+    esac
   fi
+  rc_files+=("$HOME/.zshrc" "$HOME/.bashrc")
+
+  # De-duplicate rc files
+  local unique=()
+  local f
+  for f in "${rc_files[@]}"; do
+    local seen=0
+    local uf
+    for uf in "${unique[@]}"; do [[ "$uf" == "$f" ]] && seen=1 && break; done
+    [[ $seen -eq 0 ]] && unique+=("$f")
+  done
+  rc_files=("${unique[@]}")
+
+  local add_line
+  add_line() {
+    local file="$1"; shift
+    local line="$*"
+    mkdir -p "$(dirname "$file")"
+    touch "$file"
+    grep -Fq "$line" "$file" || echo "$line" >>"$file"
+  }
+
+  # Aliases to add
+  local a_notes="alias nvim-notes='NVIM_APPNAME=nvim-notes nvim'"
+  local a_learn="alias nvim-learn='nvim -u $KICKSTART_PATH/init.lua'"
+  local a_neovide_notes="alias neovide-notes='NVIM_APPNAME=nvim-notes neovide'"
+  local a_neovide_learn="alias neovide-learn='neovide -- -u $KICKSTART_PATH/init.lua'"
+
+  for f in "${rc_files[@]}"; do
+    add_line "$f" "$a_notes"
+    add_line "$f" "$a_learn"
+    if command -v neovide >/dev/null 2>&1; then
+      add_line "$f" "$a_neovide_notes"
+      add_line "$f" "$a_neovide_learn"
+    fi
+  done
 }
 
 link_profile() {
