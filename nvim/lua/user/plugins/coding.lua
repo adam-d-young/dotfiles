@@ -25,6 +25,8 @@ return {
     "folke/neodev.nvim",
     event = { "BufReadPre", "BufNewFile" },
     opts = {},
+    -- neodev needs nvim-lspconfig for lspconfig.util
+    dependencies = { "neovim/nvim-lspconfig" },
   },
   {
     "hrsh7th/cmp-nvim-lsp",
@@ -82,12 +84,16 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       local none = require("null-ls")
-      none.setup({
-        sources = {
-          none.builtins.formatting.stylua,
-          none.builtins.diagnostics.luacheck.with({ extra_args = { "--globals", "vim" } }),
-        },
-      })
+      local sources = {
+        none.builtins.formatting.stylua,
+      }
+      
+      -- Add luacheck if available
+      if none.builtins.diagnostics.luacheck then
+        table.insert(sources, none.builtins.diagnostics.luacheck.with({ extra_args = { "--globals", "vim" } }))
+      end
+      
+      none.setup({ sources = sources })
     end,
   },
 }
