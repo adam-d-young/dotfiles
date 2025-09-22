@@ -36,8 +36,8 @@ jobs:
 
       - name: Fetch plenary.nvim for tests
         run: |
-          mkdir -p nvim/tests/site/pack/vendor/start
-          git clone --depth 1 https://github.com/nvim-lua/plenary.nvim nvim/tests/site/pack/vendor/start/plenary.nvim
+          mkdir -p nvim/.tests/site/pack/vendor/start
+          git clone --depth 1 https://github.com/nvim-lua/plenary.nvim nvim/.tests/site/pack/vendor/start/plenary.nvim
 
       - name: Run tests (Plenary)
         working-directory: nvim
@@ -45,7 +45,7 @@ jobs:
           NVIM_APPNAME: nvim-dev
         run: |
           nvim --headless -u tests/minimal_init.lua \
-            -c "PlenaryBustedDirectory tests/ {minimal_init = 'tests/minimal_init.lua'}" \
+            -c "PlenaryBustedDirectory tests/spec {minimal_init = 'tests/minimal_init.lua'}" \
             -c "qa!"
 
   macos-validate:
@@ -76,8 +76,8 @@ jobs:
 
       - name: Fetch plenary.nvim for tests
         run: |
-          mkdir -p nvim/tests/site/pack/vendor/start
-          git clone --depth 1 https://github.com/nvim-lua/plenary.nvim nvim/tests/site/pack/vendor/start/plenary.nvim
+          mkdir -p nvim/.tests/site/pack/vendor/start
+          git clone --depth 1 https://github.com/nvim-lua/plenary.nvim nvim/.tests/site/pack/vendor/start/plenary.nvim
 
       - name: Run tests (Plenary, macOS)
         working-directory: nvim
@@ -85,7 +85,7 @@ jobs:
           NVIM_APPNAME: nvim-dev
         run: |
           nvim --headless -u tests/minimal_init.lua \
-            -c "PlenaryBustedDirectory tests/ {minimal_init = 'tests/minimal_init.lua'}" \
+            -c "PlenaryBustedDirectory tests/spec {minimal_init = 'tests/minimal_init.lua'}" \
             -c "qa!"
 
       - name: Validate setup.sh behavior on macOS
