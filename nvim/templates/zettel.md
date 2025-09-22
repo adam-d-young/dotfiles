@@ -1,5 +1,5 @@
 ---
-title: "<% title %>"
+title: "{{title}}"
 tags:
   - 
 aliases:
@@ -7,7 +7,7 @@ aliases:
 status: "seed"
 ---
 
-# <% title %>
+# {{title}}
 
 > A one-sentence summary of the note's core idea.
 

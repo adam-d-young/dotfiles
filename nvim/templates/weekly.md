@@ -1,5 +1,5 @@
 ---
-title: "Week <% W %> of <% anio %>"
+title: "Week {{week}} of {{year}}"
 tags:
   - weekly
   - review
@@ -8,7 +8,7 @@ aliases:
 status: "review"
 ---
 
-# Weekly Review & Plan: Week <% W %> of <% anio %>
+# Weekly Review & Plan: Week {{week}} of {{year}}
 
 ## ⏪ Review Last Week
 ### 🏆 Wins

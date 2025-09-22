@@ -1,5 +1,5 @@
 ---
-title: "<% anio %>-<% mes %>-<% dia %>"
+title: "{{date}}"
 tags:
   - daily
 aliases:
@@ -7,7 +7,7 @@ aliases:
 status: "log"
 ---
 
-# Daily Note for <% anio %>-<% mes %>-<% dia %>
+# Daily Note for {{hdate}}
 
 > What is the one thing I must accomplish today?
 
@@ -20,7 +20,7 @@ status: "log"
 
 ---
 ## 📝 Log
-* **10:08** - 
+* **{{time24}}** - 
 
 ## 🌱 Seeds
 * ---

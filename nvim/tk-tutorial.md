@@ -158,12 +158,20 @@ Templates are located in `~/Dropbox/Apps/zettelkasten/templates/`:
 
 ## 🎨 Template Variables
 
-Templates support these variables:
-- `<% anio %>` - Year (2025)
-- `<% mes %>` - Month (01)
-- `<% dia %>` - Day (22)
-- `<% W %>` - Week number
-- `<quarter>` - Quarter number
+Templates support these variables (use `{{variable}}` syntax):
+- `{{date}}` - Date in ISO format (2025-01-22)
+- `{{year}}` - Year (2025)
+- `{{time24}}` - Time with 24-hour clock (19:12:23)
+- `{{time12}}` - Time with 12-hour clock (07:12:23 PM)
+- `{{hdate}}` - Date in long format (Sunday, January 22nd, 2025)
+- `{{week}}` - Week of the year (46)
+- `{{title}}` - Note title
+- `{{shorttitle}}` - Short title (filename without path)
+- `{{uuid}}` - Unique identifier
+- `{{prevday}}` - Previous day (2025-01-21)
+- `{{nextday}}` - Next day (2025-01-23)
+
+For a complete list, run `:h telekasten.template_files` in Neovim.
 
 ## 🚨 Troubleshooting
 

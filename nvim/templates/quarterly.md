@@ -1,5 +1,5 @@
 ---
-title: "<% anio %> Q<quarter>"
+title: "{{year}} Q1"
 tags:
   - quarterly
   - review
@@ -9,7 +9,7 @@ aliases:
 status: "review"
 ---
 
-# Quarterly Review & Plan: <% anio %> Q<quarter>
+# Quarterly Review & Plan: {{year}} Q1
 
 ## ⏪ Review Last Quarter
 ### 📈 Progress on Strategic Goals

@@ -1,5 +1,5 @@
 ---
-title: "<% anio %>-<% mes %> Monthly Review"
+title: "{{year}}-{{date}} Monthly Review"
 tags:
   - monthly
   - review
@@ -8,7 +8,7 @@ aliases:
 status: "review"
 ---
 
-# Monthly Review & Plan: <% anio %>-<% mes %>
+# Monthly Review & Plan: {{year}}-{{date}}
 
 ## ⏪ Review Last Month
 ### 🏆 Wins
