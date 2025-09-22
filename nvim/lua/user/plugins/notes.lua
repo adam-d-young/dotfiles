@@ -15,10 +15,15 @@ return {
       "nvim-telescope/telescope-media-files.nvim",
     },
     opts = function()
-      -- Allow overriding Telekasten home via env vars
-      local env_home = vim.env.TELEKASTEN_HOME or vim.env.ZK_HOME or nil
-      local home = env_home and vim.fn.expand(env_home) or vim.fn.expand("~/.zk")
+      -- Use absolute paths directly - avoid vim.fn.expand() issues
+      local env_home = vim.env.TELEKASTEN_HOME or vim.env.ZK_HOME
+      local home = env_home or os.getenv("HOME") .. "/.zk"
       local templates_path = home .. "/templates"
+      
+      -- Debug environment variables and paths
+      vim.notify("DEBUG - env_home: " .. tostring(env_home), vim.log.levels.INFO)
+      vim.notify("DEBUG - home: " .. home, vim.log.levels.INFO)
+      vim.notify("DEBUG - templates_path: " .. templates_path, vim.log.levels.INFO)
       
       return {
         home = home,
