@@ -88,7 +88,7 @@ return {
         vim.notify("none-ls not available", vim.log.levels.WARN)
         return
       end
-      
+
       none.setup({
         sources = {
           none.builtins.formatting.stylua,

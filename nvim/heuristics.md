@@ -18,6 +18,8 @@ This document outlines the guiding principles for the Neovim configuration proje
 
 6.  **Prefer Native APIs**: Always use native Neovim and Lua functions when available instead of external plugins or deprecated APIs. This ensures better performance, stability, and future compatibility. Examples: use `vim.lsp.start()` instead of `require('lspconfig')`, `vim.keymap.set()` instead of `vim.api.nvim_set_keymap()`, and `vim.opt` instead of `vim.cmd('set')`.
 
+7.  **Format Before Committing**: Always run Stylua formatting and Luacheck linting before committing code. Use `stylua --config-path ./.stylua.toml .` and `luacheck --config ./.luacheckrc .` to catch formatting and style issues locally. This prevents CI/CD failures and maintains code consistency.
+
 ---
 
 ## Coding Standards

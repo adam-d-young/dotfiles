@@ -39,10 +39,7 @@ function M.setup()
   elseif vim.fn.executable("marksman") == 1 then
     setup_lsp_server("marksman", { "marksman", "server" })
   else
-    vim.notify(
-      "Marksman LSP not found. Install with: brew install marksman",
-      vim.log.levels.WARN
-    )
+    vim.notify("Marksman LSP not found. Install with: brew install marksman", vim.log.levels.WARN)
   end
 end
 

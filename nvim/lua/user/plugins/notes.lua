@@ -19,7 +19,7 @@ return {
       local env_home = vim.env.TELEKASTEN_HOME or vim.env.ZK_HOME
       local home = env_home and vim.fn.expand(env_home) or vim.fn.expand("~/.zk")
       local templates_path = home .. "/templates"
-      
+
       return {
         home = home,
         dailies = home .. "/daily",
@@ -38,9 +38,14 @@ return {
       local templates_dir = opts.templates
       if vim.fn.isdirectory(templates_dir) == 0 then
         vim.fn.mkdir(templates_dir, "p")
-        vim.notify("Telekasten templates directory created: " .. templates_dir .. " (run setup script to install templates)", vim.log.levels.WARN)
+        vim.notify(
+          "Telekasten templates directory created: "
+            .. templates_dir
+            .. " (run setup script to install templates)",
+          vim.log.levels.WARN
+        )
       end
-      
+
       require("telekasten").setup(opts)
       -- Telescope extension for media files
       pcall(require("telescope").load_extension, "media_files")
