@@ -50,6 +50,14 @@ If unset, the default is `~/.zk`.
 
 ### Testing and Development
 
+#### Pre-commit Checklist
+Before committing changes, always run:
+```bash
+# From the nvim/ directory
+make check
+```
+This runs both linting and tests to ensure code quality and functionality.
+
 #### Running Tests
 ```bash
 # Run all tests

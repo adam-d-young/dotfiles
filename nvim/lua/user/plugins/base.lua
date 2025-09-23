@@ -62,7 +62,7 @@ return {
     config = function()
       vim.g.bullets_enabled_file_types = {
         "markdown",
-        "text", 
+        "text",
         "gitcommit",
         "scratch",
       }
@@ -83,7 +83,7 @@ return {
     config = function()
       local luasnip = require("luasnip")
       require("luasnip.loaders.from_vscode").lazy_load()
-      
+
       -- Custom snippets for markdown/telekasten
       luasnip.add_snippets("markdown", {
         luasnip.snippet("meeting", {
