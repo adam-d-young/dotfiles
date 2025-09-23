@@ -1,5 +1,6 @@
 ---
 title: "{{month}} {{year}}"
+uuid: "{{uuid}}"
 tags:
   - monthly
   - review

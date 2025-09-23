@@ -1,5 +1,6 @@
 ---
 title: "{{date}}"
+uuid: "{{uuid}}"
 tags:
   - daily
   - stage/log

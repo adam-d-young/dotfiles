@@ -187,3 +187,19 @@ This part of the plan focuses on creating a sophisticated setup script to manage
     * Planning and research complete. Ready to begin development.
 * **Next Steps**:
     * Begin work on Core Scaffolding & Tooling.
+
+### **2025-09-23** - Iteration 11 - Zettels dir, UUID frontmatter, simplified filenames
+* **Changes**:
+    * Switched new-note filename policy to title-based to keep wikilinks simple (`[[Title]]`).
+    * Kept unique identifiers via YAML `uuid:` injected in all templates (daily/weekly/monthly/yearly/zettel/area/project) using datetime (`%Y%m%d%H%M%S`).
+    * Added `zettels/` directory and routed `<space>zn` to create new zettels there by default.
+    * Ensured clean links by setting `subdirs_in_links = false`.
+    * Added Telekasten highlight overrides in Lua (`tkLink`, `tkBrackets`, `tkTag`, etc.) with ColorScheme autocmd to persist across themes.
+    * Inserted “Quarter Progress” section into new monthly notes automatically, indicating month 1–3 within the quarter.
+    * Added keymaps: `<space>zl` (insert link), `<space>zf` (follow/create link), preserved existing daily/weekly/monthly/yearly mappings.
+* **Status**:
+    * Title-only filenames and vault-wide resolution mean links stay path-free and robust.
+    * UUIDs live in frontmatter for traceability without polluting filenames.
+* **Next Steps**:
+    * Optionally add a `--link` mode to setup.sh to symlink profiles for live edits.
+    * Consider a wrapper for `<space>zl` that routes new-note creation into `zettels/` explicitly.

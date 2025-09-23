@@ -1,5 +1,6 @@
 ---
 title: "Project: {{title}}"
+uuid: "{{uuid}}"
 tags:
   - project
   - status/active

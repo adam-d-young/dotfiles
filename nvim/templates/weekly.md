@@ -1,5 +1,6 @@
 ---
 title: "Week of {{monday}}"
+uuid: "{{uuid}}"
 tags:
   - weekly
   - review

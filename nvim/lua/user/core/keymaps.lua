@@ -108,7 +108,13 @@ end, "Insert current time")
 map("n", "<leader>zn", function()
   local ok, tk = pcall(require, "telekasten")
   if ok then
-    tk.new_note()
+    local cfg = require("telekasten").CONFIG
+    local zdir = (cfg and cfg.zettels) or nil
+    if zdir and #zdir > 0 then
+      tk.new_templated_note({ template = "zettel", dir = zdir })
+    else
+      tk.new_note()
+    end
   end
 end, "Telekasten: new note")
 map("n", "<leader>zd", function()
@@ -123,6 +129,22 @@ map("n", "<leader>zz", function()
     tk.panel()
   end
 end, "Telekasten: panel")
+
+-- Telekasten: insert/link existing (picker supports create-on-confirm)
+map("n", "<leader>zl", function()
+  local ok, tk = pcall(require, "telekasten")
+  if ok then
+    tk.insert_link()
+  end
+end, "Telekasten: insert link")
+
+-- Telekasten: follow link under cursor (creates if missing)
+map("n", "<leader>zf", function()
+  local ok, tk = pcall(require, "telekasten")
+  if ok then
+    tk.follow_link()
+  end
+end, "Telekasten: follow link")
 
 -- Telekasten templates
 map("n", "<leader>zp", function()
@@ -149,30 +171,7 @@ map("n", "<leader>zm", function()
     tk.goto_thismonth()
   end
 end, "Telekasten: new monthly")
-map("n", "<leader>zq", function()
-  local ok, tk = pcall(require, "telekasten")
-  if ok then
-    local default_year = os.date("%Y")
-    vim.ui.input({ prompt = "Year (YYYY): ", default = default_year }, function(input_year)
-      if not input_year or input_year == "" then
-        return
-      end
-      local match = tostring(input_year):match("^%d%d%d%d$")
-      if not match then
-        vim.notify("Invalid year: " .. tostring(input_year), vim.log.levels.WARN)
-        return
-      end
-      local quarters = { "Q1", "Q2", "Q3", "Q4" }
-      vim.ui.select(quarters, { prompt = "Select quarter:" }, function(choice)
-        if not choice then
-          return
-        end
-        local title = string.format("%s %s", match, choice)
-        tk.new_templated_note({ template = "quarterly", title = title, no_prompt = true })
-      end)
-    end)
-  end
-end, "Telekasten: new quarterly")
+-- Removed quarterly creation keymap
 map("n", "<leader>zy", function()
   local ok, tk = pcall(require, "telekasten")
   if ok then

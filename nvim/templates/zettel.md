@@ -1,5 +1,6 @@
 ---
 title: "{{title}}"
+uuid: "{{uuid}}"
 tags:
   - stage/seed
 aliases:
