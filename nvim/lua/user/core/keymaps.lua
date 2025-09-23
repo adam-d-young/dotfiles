@@ -82,3 +82,41 @@ map("n", "<leader>zz", function()
     tk.panel()
   end
 end, "Telekasten: panel")
+
+-- Telekasten templates
+map("n", "<leader>zp", function()
+  local ok, tk = pcall(require, "telekasten")
+  if ok then
+    tk.new_templated_note("project")
+  end
+end, "Telekasten: new project")
+map("n", "<leader>za", function()
+  local ok, tk = pcall(require, "telekasten")
+  if ok then
+    tk.new_templated_note("area")
+  end
+end, "Telekasten: new area")
+map("n", "<leader>zw", function()
+  local ok, tk = pcall(require, "telekasten")
+  if ok then
+    tk.new_templated_note("weekly")
+  end
+end, "Telekasten: new weekly")
+map("n", "<leader>zm", function()
+  local ok, tk = pcall(require, "telekasten")
+  if ok then
+    tk.new_templated_note("monthly")
+  end
+end, "Telekasten: new monthly")
+map("n", "<leader>zq", function()
+  local ok, tk = pcall(require, "telekasten")
+  if ok then
+    tk.new_templated_note("quarterly")
+  end
+end, "Telekasten: new quarterly")
+map("n", "<leader>zy", function()
+  local ok, tk = pcall(require, "telekasten")
+  if ok then
+    tk.new_templated_note("yearly")
+  end
+end, "Telekasten: new yearly")

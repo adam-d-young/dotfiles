@@ -1,5 +1,5 @@
 ---
-title: "{{year}}-{{date}} Monthly Review"
+title: "{{month}} {{year}}"
 tags:
   - monthly
   - review
@@ -8,25 +8,33 @@ aliases:
 status: "review"
 ---
 
-# Monthly Review & Plan: {{year}}-{{date}}
+# Monthly Review & Plan: {{month}} {{year}}
 
 ## ⏪ Review Last Month
-### 🏆 Wins
+### 🏆 Major Accomplishments
 - 
 
 ### 🚧 Challenges & Lessons Learned
 - 
 
+### 📊 Key Metrics
+- 
+
 ## ⏩ Plan This Month
-### 🎯 Objectives
+### 🎯 Monthly Objectives
 1. 
 2. 
 3. 
 
-### 📚 Reading / Research Focus
+### 🚀 Active Projects
 - 
 
----
+### 📋 Areas to Focus
+- 
+
+## 🔗 Related Notes
+- 
+
 ## ▲ Links
 - 
 

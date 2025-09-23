@@ -1,5 +1,5 @@
 ---
-title: "<% anio %> Annual Review"
+title: "{{year}}"
 tags:
   - yearly
   - review
@@ -9,28 +9,36 @@ aliases:
 status: "review"
 ---
 
-# Annual Review & Plan: <% anio %>
+# Yearly Review & Plan: {{year}}
 
 ## ⏪ Review Last Year
-### 📈 Progress on Long-Term Goals
-- 
-
 ### 🏆 Major Accomplishments
 - 
 
-### 🧱 Challenges & Lessons Learned
+### 🚧 Challenges & Lessons Learned
+- 
+
+### 📊 Key Metrics & Growth
 - 
 
 ## ⏩ Plan This Year
-### ⭐ Main Theme
-> e.g., "Health & Movement," "Mastering Rust," "Financial Foundations"
+### ⭐ Annual Theme
+> e.g., "Year of Deep Learning," "Year of Health Transformation," "Year of Career Growth"
 
 ### 🎯 Strategic Goals
 1. 
 2. 
 3. 
 
----
+### 🚀 Key Projects
+- 
+
+### 📋 Areas of Focus
+- 
+
+## 🔗 Related Notes
+- 
+
 ## ▲ Links
 - 
 

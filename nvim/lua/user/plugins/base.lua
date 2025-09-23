@@ -54,4 +54,36 @@ return {
 
   -- Which key
   { "folke/which-key.nvim", event = "VeryLazy", opts = {} },
+
+  -- Snippets for template injection
+  {
+    "L3MON4D3/LuaSnip",
+    build = "make install_jsregexp",
+    event = "VeryLazy",
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+    },
+    config = function()
+      local luasnip = require("luasnip")
+      require("luasnip.loaders.from_vscode").lazy_load()
+      
+      -- Custom snippets for markdown/telekasten
+      luasnip.add_snippets("markdown", {
+        luasnip.snippet("meeting", {
+          luasnip.text_node({
+            "## 📝 Meeting Notes",
+            "",
+            "**With**: ",
+            "",
+            "### 📝 Notes",
+            "- ",
+            "",
+            "### ✅ Action Items",
+            "- [ ] ",
+            "",
+          }),
+        }),
+      })
+    end,
+  },
 }

@@ -19,6 +19,14 @@ nvim-notes
 - `<space>zz` - Open telekasten panel
 - `<space>mp` - Preview markdown with Glow
 
+### Template Keymaps
+- `<space>zp` - Create new project
+- `<space>za` - Create new area
+- `<space>zw` - Create new weekly note
+- `<space>zm` - Create new monthly note
+- `<space>zq` - Create new quarterly note
+- `<space>zy` - Create new yearly note
+
 ## 📋 Daily Workflow
 
 ### 1. Start Your Day
@@ -79,6 +87,30 @@ nvim-notes
   - Rich linking
   - Evergreen content
 
+### Projects (`project.md`)
+- **Purpose**: Specific deliverables with clear end dates
+- **Features**:
+  - Clear objectives and timeline
+  - Key files and resources
+  - Project notes and updates
+  - Links to related areas and notes
+
+### Areas (`area.md`)
+- **Purpose**: Ongoing responsibilities and domains
+- **Features**:
+  - Current status tracking
+  - Active projects within the area
+  - Regular updates and notes
+  - Links to related projects and notes
+
+### Meeting Snippets
+- **Purpose**: Quick meeting note templates within daily notes
+- **Usage**: Type `meeting` and press `<Tab>` to expand
+- **Features**:
+  - Structured meeting format
+  - Action items with checkboxes
+  - Easy to insert anywhere in daily notes
+
 ## 🔗 Linking System
 
 ### Wikilinks
@@ -86,6 +118,11 @@ nvim-notes
 [[Note Title]]           # Link to another note
 [[Note Title|Display]]   # Link with custom display text
 ```
+
+### Inserting Links
+- **Easiest way**: `<leader>zl` - Opens link picker to search and select notes
+- **Manual**: Type `[[` and start typing note title for autocomplete
+- **From search**: Use `<space>ff` to find files, then link to them
 
 ### Backlinks
 - Automatically generated in the "Backlinks" section
@@ -96,6 +133,11 @@ nvim-notes
 - `gd` on a wikilink to follow it
 - `gr` to find references to current note
 - `gi` to find similar notes
+
+### Backlink Search
+- `:Telekasten backlinks` - Show all notes linking to current note
+- `:Telekasten backlinks_here` - Show backlinks for note under cursor
+- `:Telekasten search_links` - Search for notes containing specific link patterns
 
 ## 🎯 Advanced Features
 
@@ -118,6 +160,11 @@ nvim-notes
 - `<space>mp` - Preview with Glow
 - Real-time markdown rendering
 - Terminal-native preview
+
+### Snippets
+- **Meeting notes**: Type `meeting` + `<Tab>` to insert meeting template
+- **Expand snippets**: Use `<Tab>` to expand snippets
+- **Navigate snippets**: Use `<Tab>` to jump between fields
 
 ## 📁 File Organization
 
@@ -154,7 +201,10 @@ Templates are located in `~/Dropbox/Apps/zettelkasten/templates/`:
 - `weekly.md` - Weekly note template
 - `monthly.md` - Monthly note template
 - `quarterly.md` - Quarterly note template
+- `yearly.md` - Yearly note template
 - `zettel.md` - Zettel template
+- `project.md` - Project template
+- `area.md` - Area template
 
 ## 🎨 Template Variables
 

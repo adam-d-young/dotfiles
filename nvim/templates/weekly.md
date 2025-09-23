@@ -1,5 +1,5 @@
 ---
-title: "Week {{week}} of {{year}}"
+title: "Week of {{monday}}"
 tags:
   - weekly
   - review
@@ -8,7 +8,8 @@ aliases:
 status: "review"
 ---
 
-# Weekly Review & Plan: Week {{week}} of {{year}}
+# Weekly Review & Plan: Week of {{monday}}
+*{{monday}} - {{sunday}} • Week {{week}} of {{year}}*
 
 ## ⏪ Review Last Week
 ### 🏆 Wins
