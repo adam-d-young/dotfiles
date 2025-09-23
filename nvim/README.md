@@ -48,6 +48,32 @@ echo 'export TELEKASTEN_HOME="$HOME/Notes/zk"' >> "$HOME/.zshrc"
 ```
 If unset, the default is `~/.zk`.
 
+### Testing and Development
+
+#### Running Tests
+```bash
+# Run all tests
+make test
+
+# Or run directly
+./scripts/test.sh
+
+# Run linter
+make lint
+
+# Format code
+make format
+
+# Run both lint and test
+make check
+```
+
+#### Test Structure
+- Tests are located in `tests/` directory
+- Uses plenary.nvim test harness
+- Tests cover: profiles, templates, keymaps, plugin loading, integration
+- Run with `make test` or `./scripts/test.sh`
+
 The config uses templates from:
 - `stdpath('config')/templates` (this repo's `templates/` folder once linked by setup)
 
