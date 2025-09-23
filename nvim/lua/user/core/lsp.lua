@@ -33,11 +33,22 @@ function M.setup()
   setup_lsp_server("lua_ls", { "lua-language-server" })
 
   -- Setup marksman if available
-  local marksman_path = "/opt/homebrew/bin/marksman"
-  if vim.fn.executable(marksman_path) == 1 then
-    setup_lsp_server("marksman", { marksman_path, "server" })
-  elseif vim.fn.executable("marksman") == 1 then
-    setup_lsp_server("marksman", { "marksman", "server" })
+  local marksman_candidates = {
+    "marksman", -- Try PATH first
+    "/opt/homebrew/bin/marksman", -- Homebrew on Apple Silicon
+    "/usr/local/bin/marksman", -- Homebrew on Intel Mac
+  }
+
+  local marksman_cmd = nil
+  for _, candidate in ipairs(marksman_candidates) do
+    if vim.fn.executable(candidate) == 1 then
+      marksman_cmd = candidate
+      break
+    end
+  end
+
+  if marksman_cmd then
+    setup_lsp_server("marksman", { marksman_cmd, "server" })
   else
     vim.notify("Marksman LSP not found. Install with: brew install marksman", vim.log.levels.WARN)
   end
