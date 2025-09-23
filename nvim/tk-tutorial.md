@@ -319,7 +319,103 @@ For a complete list, run `:h telekasten.template_files` in Neovim.
 2. Take notes and add links
 3. Create related zettels as needed
 4. Build a network of connected concepts
-5. Review backlinks to discover new connections
+
+## 🔄 Cross-Vault Workflow: Logseq → Telekasten
+
+### Finding Content in Logseq
+1. **Change to Logseq directory**:
+   ```vim
+   :cd ~/Dropbox/Apps/Logseq
+   ```
+   (Adjust path to your Logseq vault)
+
+2. **Search for files**:
+   - `<space>ff` - Find specific note files
+   - Use fuzzy search to locate notes by title
+
+3. **Search content**:
+   - `<space>fg` - Live grep across all Logseq notes
+   - Search for specific concepts, quotes, or ideas
+   - Use ripgrep patterns: `"exact phrase"` or `\bword\b`
+
+4. **Advanced search**:
+   - `<space>ga` - Live grep with arguments
+   - Examples:
+     - `--type md` - Only markdown files
+     - `--ignore-case` - Case insensitive
+     - `--word-regexp` - Whole word matches
+     - `--include="*.md"` - Specific file patterns
+
+### Transferring Content to Telekasten
+
+#### Method 1: Copy and Link
+1. **Find the Logseq note** using the search above
+2. **Open the note** and select the content you want
+3. **Create new Telekasten note**: `<space>zn`
+4. **Paste and adapt** the content
+5. **Add backlink**: `[[Logseq Note Title]]` in the Links section
+
+#### Method 2: Reference and Extract
+1. **Create a Telekasten note** about the topic: `<space>zn`
+2. **Add reference** in Links section: `[[Logseq Note Title]]`
+3. **Extract key insights** and write them in your own words
+4. **Link to related Telekasten notes** using `[[Note Title]]`
+
+#### Method 3: Atomic Note Creation
+1. **Search Logseq** for a specific concept: `<space>fg` in Logseq directory
+2. **Find the relevant section** in the search results
+3. **Create atomic zettel**: `<space>zn` with focused title
+4. **Extract the core idea** and write it concisely
+5. **Link back to source**: `[[Logseq Note Title]]`
+
+### Advanced Telescope Features
+
+#### Using Frecency for Recent Notes
+- `<space>fr` - Shows recently accessed files
+- Great for finding notes you were just working on
+
+#### Using Symbols for Code/Structured Content
+- `<space>ts` - Search for symbols (functions, classes, etc.)
+- Useful if your Logseq notes contain code snippets
+
+#### Using BibTeX for References
+- `<space>tb` - Search bibliography entries
+- If you have academic references in your notes
+
+### Telekasten Integration Features
+
+#### Calendar Integration
+- `<space>zz` - Open Telekasten panel
+- Navigate to specific dates to see what you were working on
+- Link daily notes to Logseq content: `[[2024-01-15]] - Found this in Logseq`
+
+#### Template System
+- Use project templates: `<space>zp` for Logseq-related projects
+- Use area templates: `<space>za` for ongoing Logseq workflows
+- Link Logseq notes to projects/areas
+
+#### Backlink Discovery
+- After linking to Logseq notes, use Telekasten's backlink features
+- See which Telekasten notes reference your Logseq content
+- Build bidirectional knowledge networks
+
+### Example: Migrating a Research Note
+
+1. **Search Logseq**: `:cd ~/Logseq` → `<space>fg` → search "machine learning"
+2. **Find relevant note**: Open the most relevant result
+3. **Create Telekasten zettel**: `<space>zn` → "Machine Learning Concepts"
+4. **Extract key points**: Write atomic notes for each concept
+5. **Link back**: Add `[[Logseq ML Research]]` to Links section
+6. **Connect ideas**: Link to other Telekasten notes with `[[Related Concept]]`
+7. **Update daily note**: `<space>zd` → log the migration work
+
+### Pro Tips
+
+- **Use ripgrep patterns** for precise searches: `"exact phrase"` or `\bword\b`
+- **Combine searches**: Search Logseq, then search Telekasten for related content
+- **Create index notes**: Make Telekasten notes that catalog your Logseq content
+- **Use timestamps**: `<Ctrl-g><Ctrl-t>` to track when you migrated content
+- **Build bridges**: Create Telekasten notes that connect Logseq concepts
 
 ---
 
