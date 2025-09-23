@@ -64,7 +64,7 @@ end, "Document diagnostics")
 map("n", "<leader>mp", ":Glow<CR>", "Markdown preview (Glow)")
 
 -- Timestamp insertion for daily notes
-map("i", "<C-t>", function()
+map("i", "<C-g><C-t>", function()
   local timestamp = os.date("%H:%M")
   vim.api.nvim_put({ timestamp }, "c", true, true)
 end, "Insert current time")

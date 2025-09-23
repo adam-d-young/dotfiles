@@ -174,8 +174,9 @@ nvim-notes
 - **Empty cleanup**: Empty bullet points are automatically removed
 
 ### Timestamp Shortcuts
-- **Insert time**: Press `Ctrl-t` in insert mode to insert current time (HH:MM)
+- **Insert time**: Press `<Ctrl-g><Ctrl-t>` in insert mode to insert current time (HH:MM)
 - **Log entries**: Use in daily note log section for quick time-stamped entries
+- **Note**: `<Ctrl-t>` is used by bullets.vim for indenting, so we use `<Ctrl-g><Ctrl-t>` for timestamps
 
 ## 📁 File Organization
 
