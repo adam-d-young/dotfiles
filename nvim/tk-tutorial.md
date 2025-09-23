@@ -18,6 +18,11 @@ nvim-notes
 - `<space>zn` - Create new note
 - `<space>zz` - Open telekasten panel
 - `<space>mp` - Preview markdown with Glow
+- `<space>fd` - Find files (Telekasten)
+- `<space>fde` - Find files (extended - choose directory)
+- `<space>gd` - Live grep (Telekasten)
+- `<space>gde` - Live grep (extended - choose directory)
+- `<space>ga` - Live grep with args (advanced ripgrep)
 
 ### Template Keymaps
 - `<space>zp` - Create new project
@@ -160,9 +165,17 @@ nvim-notes
 - Jump to specific daily notes
 
 ### Search & Discovery
-- `<space>ff` - Find files (telescope)
-- `<space>fg` - Live grep search
+- `<space>ff` - Find files (telescope - searches current directory)
+- `<space>fg` - Live grep search (telescope - searches current directory)
 - `<space>fr` - Frecency (frequently used files)
+- `<space>fd` - Find files (Telekasten vault)
+- `<space>gd` - Live grep (Telekasten vault)
+- `<space>ga` - Live grep with args (advanced ripgrep)
+
+**Search Workflow**:
+- **Telekasten search**: Use `<space>fd` and `<space>gd` for instant notes search
+- **Other directories**: Change to directory with `:cd /path/to/dir` then use `<space>ff` and `<space>fg`
+- **Ripgrep powered**: All searches use ripgrep for lightning-fast results
 
 ### Media Support
 - Paste images directly into notes
@@ -218,6 +231,8 @@ nvim-notes
 export TELEKASTEN_HOME="/path/to/your/zettelkasten"
 # or
 export ZK_HOME="/path/to/your/zettelkasten"
+# For cross-vault search with Logseq
+export LOGSEQ_HOME="/path/to/your/logseq/vault"
 ```
 
 ### Custom Templates

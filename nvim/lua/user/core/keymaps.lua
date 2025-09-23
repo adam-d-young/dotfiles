@@ -63,6 +63,41 @@ end, "Document diagnostics")
 -- Markdown preview via Glow
 map("n", "<leader>mp", ":Glow<CR>", "Markdown preview (Glow)")
 
+-- Quick Telekasten search (most common use case)
+map("n", "<leader>fd", function()
+  local telekasten_home = vim.env.TELEKASTEN_HOME or vim.env.ZK_HOME or vim.fn.expand("~/.zk")
+
+  require("telescope.builtin").find_files({
+    search_dirs = { telekasten_home },
+    file_ignore_patterns = {
+      "%.git/",
+      "%.obsidian/",
+      "node_modules/",
+      "%.DS_Store",
+    },
+  })
+end, "Find files (Telekasten)")
+
+-- Quick Telekasten grep (most common use case)
+map("n", "<leader>gd", function()
+  local telekasten_home = vim.env.TELEKASTEN_HOME or vim.env.ZK_HOME or vim.fn.expand("~/.zk")
+
+  require("telescope.builtin").live_grep({
+    search_dirs = { telekasten_home },
+    file_ignore_patterns = {
+      "%.git/",
+      "%.obsidian/",
+      "node_modules/",
+      "%.DS_Store",
+    },
+  })
+end, "Live grep (Telekasten)")
+
+-- Advanced ripgrep search with arguments
+map("n", "<leader>ga", function()
+  require("telescope").extensions.live_grep_args.live_grep_args()
+end, "Live grep with args (ripgrep)")
+
 -- Timestamp insertion for daily notes
 map("i", "<C-g><C-t>", function()
   local timestamp = os.date("%H:%M")
