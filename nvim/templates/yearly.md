@@ -1,15 +1,15 @@
 ---
-title: "{{year}}"
+title: "{{title}}"
 tags:
   - yearly
   - review
   - planning
+  - stage/review
 aliases:
   - 
-status: "review"
 ---
 
-# Yearly Review & Plan: {{year}}
+# Yearly Review & Plan: {{title}}
 
 ## ⏪ Review Last Year
 ### 🏆 Major Accomplishments
@@ -41,6 +41,3 @@ status: "review"
 
 ## ▲ Links
 - 
-
-## ▼ Backlinks
-> This section is populated automatically by automation.

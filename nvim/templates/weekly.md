@@ -3,9 +3,9 @@ title: "Week of {{monday}}"
 tags:
   - weekly
   - review
+  - stage/review
 aliases:
   - 
-status: "review"
 ---
 
 # Weekly Review & Plan: Week of {{monday}}
@@ -31,6 +31,3 @@ status: "review"
 ---
 ## ▲ Links
 - 
-
-## ▼ Backlinks
-> This section is populated automatically by automation.

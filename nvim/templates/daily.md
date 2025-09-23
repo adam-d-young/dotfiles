@@ -2,9 +2,9 @@
 title: "{{date}}"
 tags:
   - daily
+  - stage/log
 aliases:
   - 
-status: "log"
 ---
 
 # Daily Note for {{hdate}}

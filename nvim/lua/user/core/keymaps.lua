@@ -128,13 +128,13 @@ end, "Telekasten: panel")
 map("n", "<leader>zp", function()
   local ok, tk = pcall(require, "telekasten")
   if ok then
-    tk.new_templated_note("project")
+    tk.new_templated_note({ template = "project" })
   end
 end, "Telekasten: new project")
 map("n", "<leader>za", function()
   local ok, tk = pcall(require, "telekasten")
   if ok then
-    tk.new_templated_note("area")
+    tk.new_templated_note({ template = "area" })
   end
 end, "Telekasten: new area")
 map("n", "<leader>zw", function()
@@ -152,12 +152,41 @@ end, "Telekasten: new monthly")
 map("n", "<leader>zq", function()
   local ok, tk = pcall(require, "telekasten")
   if ok then
-    tk.new_templated_note("quarterly")
+    local default_year = os.date("%Y")
+    vim.ui.input({ prompt = "Year (YYYY): ", default = default_year }, function(input_year)
+      if not input_year or input_year == "" then
+        return
+      end
+      local match = tostring(input_year):match("^%d%d%d%d$")
+      if not match then
+        vim.notify("Invalid year: " .. tostring(input_year), vim.log.levels.WARN)
+        return
+      end
+      local quarters = { "Q1", "Q2", "Q3", "Q4" }
+      vim.ui.select(quarters, { prompt = "Select quarter:" }, function(choice)
+        if not choice then
+          return
+        end
+        local title = string.format("%s %s", match, choice)
+        tk.new_templated_note({ template = "quarterly", title = title, no_prompt = true })
+      end)
+    end)
   end
 end, "Telekasten: new quarterly")
 map("n", "<leader>zy", function()
   local ok, tk = pcall(require, "telekasten")
   if ok then
-    tk.new_templated_note("yearly")
+    local default_year = os.date("%Y")
+    vim.ui.input({ prompt = "Year (YYYY): ", default = default_year }, function(input_year)
+      if not input_year or input_year == "" then
+        return
+      end
+      local match = tostring(input_year):match("^%d%d%d%d$")
+      if not match then
+        vim.notify("Invalid year: " .. tostring(input_year), vim.log.levels.WARN)
+        return
+      end
+      tk.new_templated_note({ template = "yearly", title = match, no_prompt = true })
+    end)
   end
 end, "Telekasten: new yearly")

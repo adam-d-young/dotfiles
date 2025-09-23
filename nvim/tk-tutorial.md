@@ -108,6 +108,60 @@ nvim-notes
   - Regular updates and notes
   - Links to related projects and notes
 
+## 👥 Contacts Workflow
+
+## 🌱 Weekly Review by Stage (system tags)
+
+We mirror note stage into system-level tags for fast surfacing:
+- `stage/seed` → raw capture
+- `stage/sprout` → developing
+- `stage/plant` → linked to graph
+- `stage/evergreen` → stable, reusable
+- `stage/log` → chronological logs (daily/weekly/monthly/quarterly/yearly)
+
+### How to review
+- Open Telekasten panel `<space>zz` → Tags → pick one of the stage tags
+- Or grep just the vault: `<space>gd` and search `stage/seed` (or use `<space>ga` for advanced patterns)
+
+### Weekly checklist
+- Seeds → promote promising notes to `stage/sprout`
+- Sprouts → add ≥2 outbound links; aim for one inbound link; promote to `stage/plant`
+- Plants → refine to atomic, timeless notes; promote to `stage/evergreen`
+- Evergreen → prune/merge; archive obsolete notes (tag `stage/archived`)
+
+### Create a contact note (title = contact name)
+```markdown
+---
+title: "Ada Lovelace"
+tags:
+  - contact
+---
+```
+- Press `<space>zn` and title the note with the person’s name
+- Add the system tag `contact` in frontmatter
+- Optional quick fields in the body: email, org, role
+
+### Link contact to an Area
+- In the contact note (under “Links”), add: `[[Area: Client X Consulting]]`
+- Optional: in the Area note, add back a link to the contact (explicit surfacing)
+
+### Capture meetings with the contact
+- In the daily note `<space>zd>`, add a line like: `[[Ada Lovelace]] – notes / action items`
+- Backlinks in the contact note will show all daily notes referencing them
+
+### Surface all contacts
+- Telekasten panel `<space>zz` → pick Tags → enter `contact`
+- Telescope (Telekasten vault only):
+  - `<space>gd` and search for `- contact` or `tags: contact`
+  - Advanced (`<space>ga`):
+    ```
+    --type md -e '(^tags:.*\bcontact\b)|(^\s*-\s*\bcontact\b)'
+    ```
+
+### Fast-path creation from anywhere
+- Type `[[Ada Lovelace]]` and follow the link; if the note doesn’t exist, Telekasten offers to create it
+- Add the `contact` tag and link to the Area
+
 ### Meeting Notes
 - **Purpose**: Quick meeting note templates within daily notes
 - **Usage**: Copy and paste the meeting template below as needed
@@ -157,6 +211,16 @@ nvim-notes
 - `:Telekasten backlinks_here` - Show backlinks for note under cursor
 - `:Telekasten search_links` - Search for notes containing specific link patterns
 
+## 🏷️ Tagging Philosophy
+
+Use tags as functional system markers, not topical labels:
+- What a note IS: `daily`, `weekly`, `monthly`, `quarterly`, `status/active`, `stage/seed|sprout|plant|evergreen|log`
+- What a note is ABOUT should be expressed via links to atomic zettels, not tags. Link concepts with `[[Concept]]` and let backlinks surface relationships.
+
+Benefits:
+- Predictable discovery via tag pickers (Telekasten) and Telescope
+- Cleaner graph: concepts are nodes (notes), not tags
+- Easier reviews (e.g., weekly stage review, active areas/projects)
 ## 🎯 Advanced Features
 
 ### Calendar Integration

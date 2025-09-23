@@ -1,15 +1,15 @@
 ---
-title: "{{year}} Q1"
+title: "{{title}}"
 tags:
   - quarterly
   - review
   - planning
+  - stage/review
 aliases:
   - 
-status: "review"
 ---
 
-# Quarterly Review & Plan: {{year}} Q1
+# Quarterly Review & Plan: {{title}}
 
 ## ⏪ Review Last Quarter
 ### 📈 Progress on Strategic Goals
@@ -31,5 +31,3 @@ status: "review"
 ## ▲ Links
 - 
 
-## ▼ Backlinks
-> This section is populated automatically by automation.

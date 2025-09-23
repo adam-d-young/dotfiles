@@ -2,9 +2,9 @@
 title: "Project: {{title}}"
 tags:
   - project
+  - status/active
 aliases:
   - 
-status: "active"
 ---
 
 # Project: {{title}}
@@ -33,6 +33,3 @@ status: "active"
 
 ## ▲ Links
 - 
-
-## ▼ Backlinks
-> This section is populated automatically by automation.

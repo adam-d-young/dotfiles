@@ -2,9 +2,9 @@
 title: "{{title}}"
 tags:
   - area
+  - status/active
 aliases:
   - 
-status: "active"
 ---
 
 # {{title}}
@@ -25,6 +25,3 @@ status: "active"
 
 ## ▲ Links
 - 
-
-## ▼ Backlinks
-> This section is populated automatically by automation.

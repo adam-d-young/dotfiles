@@ -55,6 +55,13 @@ This section will integrate additional plugins to enhance the editing and note-t
     * **`telescope-frecency.nvim`**: For intelligent, frequency-based file history.
     * **`synctodo` script**: Documented for users in the Apple ecosystem.
 
+### Tagging Philosophy (System Tags over Topical Tags)
+Tags should be functional, not topical. Use tags to indicate what a note IS in the system, not what it is ABOUT. Examples:
+- Note type / cadence: `daily`, `weekly`, `monthly`, `quarterly`
+- Lifecycle (areas/projects): `status/active`
+- Note stage (maturity): `stage/seed`, `stage/sprout`, `stage/plant`, `stage/evergreen`, `stage/log`
+Avoid topical tags like `#marketing` or `#python`—prefer links to atomic zettels instead. This keeps discovery consistent via Telekasten’s tag pickers and Telescope searches.
+
 ### Helper Scripts & Automation
 This part of the plan focuses on creating a sophisticated setup script to manage the three distinct configurations. The best practice for managing separate-but-related configs is to use the `NVIM_APPNAME` environment variable, which creates isolated configuration directories.
 

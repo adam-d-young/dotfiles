@@ -3,9 +3,9 @@ title: "{{month}} {{year}}"
 tags:
   - monthly
   - review
+  - stage/review
 aliases:
   - 
-status: "review"
 ---
 
 # Monthly Review & Plan: {{month}} {{year}}
@@ -37,6 +37,3 @@ status: "review"
 
 ## ▲ Links
 - 
-
-## ▼ Backlinks
-> This section is populated automatically by automation.

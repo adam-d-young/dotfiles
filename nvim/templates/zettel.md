@@ -1,10 +1,9 @@
 ---
 title: "{{title}}"
 tags:
-  - 
+  - stage/seed
 aliases:
   - 
-status: "seed"
 ---
 
 # {{title}}
@@ -18,6 +17,3 @@ status: "seed"
 ---
 ## ▲ Links
 - 
-
-## ▼ Backlinks
-> This section is populated automatically by automation.
