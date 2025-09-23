@@ -101,6 +101,6 @@ jobs:
           bash scripts/setup.sh
           # Check either zshrc or bashrc for aliases written by setup.sh
           (grep -q "nvim-notes" "$HOME/.zshrc" || grep -q "nvim-notes" "$HOME/.bashrc")
-          (grep -q "nvim-dev" "$HOME/.zshrc" || grep -q "nvim-dev" "$HOME/.bashrc")
+          (grep -q "nvim-learn" "$HOME/.zshrc" || grep -q "nvim-learn" "$HOME/.bashrc")
           test -d "$HOME/.config/nvim-notes"
-          test -d "$HOME/.config/nvim-dev"
+          test -d "$HOME/.config/nvim"
