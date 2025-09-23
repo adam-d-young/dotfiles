@@ -55,6 +55,23 @@ return {
   -- Which key
   { "folke/which-key.nvim", event = "VeryLazy", opts = {} },
 
+  -- List management and bullet points
+  {
+    "dkarter/bullets.vim",
+    ft = { "markdown", "text", "gitcommit", "scratch" },
+    config = function()
+      vim.g.bullets_enabled_file_types = {
+        "markdown",
+        "text", 
+        "gitcommit",
+        "scratch",
+      }
+      vim.g.bullets_auto_indent_after_colon = 1
+      vim.g.bullets_renumber_on_change = 1
+      vim.g.bullets_delete_last_bullet_if_empty = 1
+    end,
+  },
+
   -- Snippets for template injection
   {
     "L3MON4D3/LuaSnip",

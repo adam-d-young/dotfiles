@@ -15,17 +15,15 @@ status: "log"
 ## ✅ Tasks
 - [ ] 
 
-### Done Today
-> This section is populated automatically by automation.
-
 ---
 ## 📝 Log
 * **{{time24}}** - 
 
 ## 🌱 Seeds
-* ---
+* 
+
 ## ▲ Links
 - 
 
 ## ▼ Backlinks
-> This section is populated automatically by automation.
+- 

@@ -63,6 +63,12 @@ end, "Document diagnostics")
 -- Markdown preview via Glow
 map("n", "<leader>mp", ":Glow<CR>", "Markdown preview (Glow)")
 
+-- Timestamp insertion for daily notes
+map("i", "<C-t>", function()
+  local timestamp = os.date("%H:%M")
+  vim.api.nvim_put({ timestamp }, "c", true, true)
+end, "Insert current time")
+
 -- Telekasten (these will be no-ops unless notes profile/plugins are enabled)
 map("n", "<leader>zn", function()
   local ok, tk = pcall(require, "telekasten")
@@ -99,13 +105,13 @@ end, "Telekasten: new area")
 map("n", "<leader>zw", function()
   local ok, tk = pcall(require, "telekasten")
   if ok then
-    tk.new_templated_note("weekly")
+    tk.goto_thisweek()
   end
 end, "Telekasten: new weekly")
 map("n", "<leader>zm", function()
   local ok, tk = pcall(require, "telekasten")
   if ok then
-    tk.new_templated_note("monthly")
+    tk.goto_thismonth()
   end
 end, "Telekasten: new monthly")
 map("n", "<leader>zq", function()

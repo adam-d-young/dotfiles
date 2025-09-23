@@ -166,6 +166,17 @@ nvim-notes
 - **Expand snippets**: Use `<Tab>` to expand snippets
 - **Navigate snippets**: Use `<Tab>` to jump between fields
 
+### List Management
+- **Auto bullets**: Press `Enter` after `-` to create new bullet point
+- **Auto numbering**: Press `Enter` after `1.` to create numbered list
+- **Auto indentation**: Bullets automatically indent after colons
+- **Renumbering**: Numbered lists automatically renumber when items are added/removed
+- **Empty cleanup**: Empty bullet points are automatically removed
+
+### Timestamp Shortcuts
+- **Insert time**: Press `Ctrl-t` in insert mode to insert current time (HH:MM)
+- **Log entries**: Use in daily note log section for quick time-stamped entries
+
 ## 📁 File Organization
 
 ### Directory Structure
