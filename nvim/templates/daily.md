@@ -19,11 +19,5 @@ status: "log"
 ## 📝 Log
 * **{{time24}}** - 
 
-## 🌱 Seeds
-* 
-
 ## ▲ Links
-- 
-
-## ▼ Backlinks
 - 

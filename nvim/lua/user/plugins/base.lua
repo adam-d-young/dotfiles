@@ -81,26 +81,9 @@ return {
       "rafamadriz/friendly-snippets",
     },
     config = function()
-      local luasnip = require("luasnip")
       require("luasnip.loaders.from_vscode").lazy_load()
-
       -- Custom snippets for markdown/telekasten
-      luasnip.add_snippets("markdown", {
-        luasnip.snippet("meeting", {
-          luasnip.text_node({
-            "## 📝 Meeting Notes",
-            "",
-            "**With**: ",
-            "",
-            "### 📝 Notes",
-            "- ",
-            "",
-            "### ✅ Action Items",
-            "- [ ] ",
-            "",
-          }),
-        }),
-      })
+      -- (No custom snippets currently defined)
     end,
   },
 }

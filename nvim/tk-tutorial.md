@@ -103,13 +103,26 @@ nvim-notes
   - Regular updates and notes
   - Links to related projects and notes
 
-### Meeting Snippets
+### Meeting Notes
 - **Purpose**: Quick meeting note templates within daily notes
-- **Usage**: Type `meeting` and press `<Tab>` to expand
+- **Usage**: Copy and paste the meeting template below as needed
 - **Features**:
   - Structured meeting format
   - Action items with checkboxes
   - Easy to insert anywhere in daily notes
+
+**Meeting Template**:
+```markdown
+## 📝 Meeting Notes
+
+**With**: 
+
+### 📝 Notes
+- 
+
+### ✅ Action Items
+- [ ] 
+```
 
 ## 🔗 Linking System
 
@@ -162,8 +175,8 @@ nvim-notes
 - Terminal-native preview
 
 ### Snippets
-- **Meeting notes**: Type `meeting` + `<Tab>` to insert meeting template
-- **Expand snippets**: Use `<Tab>` to expand snippets
+- **Meeting notes**: Copy and paste the meeting template from the Meeting Notes section above
+- **Expand snippets**: Use `<Tab>` to expand snippets (for built-in snippets)
 - **Navigate snippets**: Use `<Tab>` to jump between fields
 
 ### List Management
