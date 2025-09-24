@@ -1,5 +1,5 @@
 ---
-title: "Project: {{title}}"
+title: "Project: {{shorttitle}}"
 uuid: "{{uuid}}"
 tags:
   - project
@@ -8,7 +8,7 @@ aliases:
   - 
 ---
 
-# Project: {{title}}
+# Project: {{shorttitle}}
 
 > Brief project description and current status
 

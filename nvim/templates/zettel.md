@@ -1,5 +1,5 @@
 ---
-title: "{{title}}"
+title: "{{shorttitle}}"
 uuid: "{{uuid}}"
 tags:
   - stage/seed
@@ -7,7 +7,7 @@ aliases:
   - 
 ---
 
-# {{title}}
+# {{shorttitle}}
 
 > A one-sentence summary of the note's core idea.
 

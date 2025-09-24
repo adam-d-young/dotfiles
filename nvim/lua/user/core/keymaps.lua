@@ -3,6 +3,92 @@ local map = function(mode, lhs, rhs, desc)
   vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
 end
 
+local last_tk_opts = {}
+
+local function telekasten_config()
+  local ok, tk = pcall(require, "telekasten")
+  if not ok then
+    return nil, last_tk_opts
+  end
+
+  local cfg = tk.cfg
+  if not cfg then
+    local get_config = rawget(tk, "get_config")
+    if type(get_config) == "function" then
+      local ok_cfg, fetched = pcall(get_config, tk)
+      if ok_cfg then
+        cfg = fetched
+      end
+    end
+  end
+  if not cfg then
+    cfg = vim.g.__telekasten_last_opts or last_tk_opts
+  end
+
+  if cfg and cfg.home then
+    last_tk_opts = cfg
+  end
+
+  return tk, cfg
+end
+
+local function normalize_subdir(home, dir)
+  if not dir or dir == "" then
+    return nil
+  end
+  if not home or home == "" then
+    return dir
+  end
+
+  local abs_home = vim.fn.expand(home):gsub("/+$", "")
+  local abs_dir = vim.fn.expand(dir):gsub("/+$", "")
+
+  if abs_dir:sub(1, #abs_home) == abs_home then
+    local remainder = abs_dir:sub(#abs_home + 1)
+    remainder = remainder:gsub("^/+", "")
+    return remainder ~= "" and remainder or nil
+  end
+
+  return abs_dir
+end
+
+local function tk_new_templated(template_key, config_key)
+  local tk, cfg = telekasten_config()
+  if not tk or not cfg then
+    return
+  end
+
+  -- Get the actual template file path
+  local template_path
+  if template_key == "zettel" then
+    template_path = cfg.template_new_note
+  elseif template_key == "area" then
+    template_path = cfg.template_new_area
+  elseif template_key == "project" then
+    template_path = cfg.template_new_project
+  else
+    template_path = template_key
+  end
+
+  -- Get the target directory
+  local target_dir = cfg[config_key]
+  
+  -- Prompt for title with directory prefix
+  local title_prefix = config_key .. "/"
+  vim.ui.input({ prompt = "Title: ", default = title_prefix }, function(input_title)
+    if not input_title or input_title == "" then
+      return
+    end
+    
+    tk.new_templated_note({ 
+      template = template_path, 
+      dir = target_dir,
+      title = input_title,
+      no_prompt = true
+    })
+  end)
+end
+
 -- Quality-of-life
 map("n", "<leader>w", ":w<CR>", "Write buffer")
 map("n", "<leader>q", ":q<CR>", "Quit window")
@@ -105,17 +191,15 @@ map("i", "<C-g><C-t>", function()
 end, "Insert current time")
 
 -- Telekasten (these will be no-ops unless notes profile/plugins are enabled)
-map("n", "<leader>zn", function()
+-- Toggle Markdown checkbox on current line via Telekasten
+map("n", "<leader>t", function()
   local ok, tk = pcall(require, "telekasten")
   if ok then
-    local cfg = require("telekasten").CONFIG
-    local zdir = (cfg and cfg.zettels) or nil
-    if zdir and #zdir > 0 then
-      tk.new_templated_note({ template = "zettel", dir = zdir })
-    else
-      tk.new_note()
-    end
+    tk.toggle_todo()
   end
+end, "Telekasten: toggle todo")
+map("n", "<leader>zn", function()
+  tk_new_templated("zettel", "zet")
 end, "Telekasten: new note")
 map("n", "<leader>zd", function()
   local ok, tk = pcall(require, "telekasten")
@@ -123,6 +207,18 @@ map("n", "<leader>zd", function()
     tk.goto_today()
   end
 end, "Telekasten: today")
+map("n", "<leader>z<", function()
+  local ok, tk = pcall(require, "telekasten")
+  if ok then
+    tk.goto_prev_day()
+  end
+end, "Telekasten: previous day")
+map("n", "<leader>z>", function()
+  local ok, tk = pcall(require, "telekasten")
+  if ok then
+    tk.goto_next_day()
+  end
+end, "Telekasten: next day")
 map("n", "<leader>zz", function()
   local ok, tk = pcall(require, "telekasten")
   if ok then
@@ -147,18 +243,6 @@ map("n", "<leader>zf", function()
 end, "Telekasten: follow link")
 
 -- Telekasten templates
-map("n", "<leader>zp", function()
-  local ok, tk = pcall(require, "telekasten")
-  if ok then
-    tk.new_templated_note({ template = "project" })
-  end
-end, "Telekasten: new project")
-map("n", "<leader>za", function()
-  local ok, tk = pcall(require, "telekasten")
-  if ok then
-    tk.new_templated_note({ template = "area" })
-  end
-end, "Telekasten: new area")
 map("n", "<leader>zw", function()
   local ok, tk = pcall(require, "telekasten")
   if ok then

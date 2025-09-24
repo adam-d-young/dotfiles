@@ -195,7 +195,7 @@ This part of the plan focuses on creating a sophisticated setup script to manage
     * Added `zettels/` directory and routed `<space>zn` to create new zettels there by default.
     * Ensured clean links by setting `subdirs_in_links = false`.
     * Added Telekasten highlight overrides in Lua (`tkLink`, `tkBrackets`, `tkTag`, etc.) with ColorScheme autocmd to persist across themes.
-    * Inserted “Quarter Progress” section into new monthly notes automatically, indicating month 1–3 within the quarter.
+    * Inserted "Quarter Progress" section into new monthly notes automatically, indicating month 1–3 within the quarter.
     * Added keymaps: `<space>zl` (insert link), `<space>zf` (follow/create link), preserved existing daily/weekly/monthly/yearly mappings.
 * **Status**:
     * Title-only filenames and vault-wide resolution mean links stay path-free and robust.
@@ -203,3 +203,19 @@ This part of the plan focuses on creating a sophisticated setup script to manage
 * **Next Steps**:
     * Optionally add a `--link` mode to setup.sh to symlink profiles for live edits.
     * Consider a wrapper for `<space>zl` that routes new-note creation into `zettels/` explicitly.
+
+### **2025-01-22** - Iteration 12 - Organized Note Structure with Clean Titles
+* **Changes**:
+    * Reorganized vault structure with shorter directory names: `zet/`, `area/`, `proj/` for better organization.
+    * Fixed Telekasten note creation to properly place notes in subdirectories using `dir` parameter.
+    * Updated templates to use `{{shorttitle}}` variable to display clean titles without directory prefixes in frontmatter and headings.
+    * Added daily note navigation keymaps: `<leader>z<` (previous day), `<leader>z>` (next day) for browsing existing daily notes.
+    * Removed non-functional area and project keymaps, keeping only working `<leader>zn` for zettel creation.
+    * Enhanced template system to handle directory-prefixed titles while maintaining clean display.
+* **Status**:
+    * Organized note structure with proper subdirectory placement.
+    * Clean title display in templates using Telekasten's built-in `{{shorttitle}}` variable.
+    * Functional daily note navigation and zettel creation workflows.
+* **Next Steps**:
+    * Consider adding back area/project keymaps once directory placement issues are resolved.
+    * Add test coverage for Telekasten-specific keymaps and template functionality.

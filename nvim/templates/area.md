@@ -1,5 +1,5 @@
 ---
-title: "{{title}}"
+title: "{{shorttitle}}"
 uuid: "{{uuid}}"
 tags:
   - area
@@ -8,7 +8,7 @@ aliases:
   - 
 ---
 
-# {{title}}
+# {{shorttitle}}
 
 > Brief description of this ongoing responsibility or domain
 

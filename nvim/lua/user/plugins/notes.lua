@@ -25,11 +25,17 @@ return {
         dailies = home .. "/daily",
         weeklies = home .. "/weekly",
         monthlies = home .. "/monthly",
-        zettels = home .. "/zettels",
+        zettels = home .. "/zet",
+        areas = home .. "/area",
+        projects = home .. "/proj",
         templates = templates_path,
         template_new_note = templates_path .. "/zettel.md",
         template_new_daily = templates_path .. "/daily.md",
         template_new_weekly = templates_path .. "/weekly.md",
+        template_new_monthly = templates_path .. "/monthly.md",
+        template_new_yearly = templates_path .. "/yearly.md",
+        template_new_area = templates_path .. "/area.md",
+        template_new_project = templates_path .. "/project.md",
         plug_into_calendar = true,
         media_previewer = "viu-previewer",
         media_extensions = { "png", "jpg", "jpeg", "gif", "webp" },
@@ -43,6 +49,10 @@ return {
         -- Keep links clean (no subdir prefixes in [[links]])
         subdirs_in_links = false,
         follow_creates_nonexisting = true,
+        -- Parse tags from YAML frontmatter
+        tag_notation = "yaml-bare",
+        -- Ensure Telekasten honors subdirs embedded in titles like "areas/My Area"
+        path_handling = "smart",
       }
     end,
     config = function(_, opts)
@@ -60,9 +70,16 @@ return {
       if opts.zettels and vim.fn.isdirectory(opts.zettels) == 0 then
         vim.fn.mkdir(opts.zettels, "p")
       end
+      if opts.areas and vim.fn.isdirectory(opts.areas) == 0 then
+        vim.fn.mkdir(opts.areas, "p")
+      end
+      if opts.projects and vim.fn.isdirectory(opts.projects) == 0 then
+        vim.fn.mkdir(opts.projects, "p")
+      end
 
       local tk = require("telekasten")
       tk.setup(opts)
+      vim.g.__telekasten_last_opts = opts
 
       -- Telekasten highlight groups (reapply on colorscheme change)
       local function apply_tk_highlights()
