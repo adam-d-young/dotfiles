@@ -50,6 +50,8 @@ return {
         subdirs_in_links = false,
         follow_creates_nonexisting = true,
         -- Parse tags from YAML frontmatter
+        -- Note: yaml-bare expects tags: [tag1, tag2] format
+        -- For tags: \n  - tag1 \n  - tag2 format, we need to use a different approach
         tag_notation = "yaml-bare",
         -- Ensure Telekasten honors subdirs embedded in titles like "areas/My Area"
         path_handling = "smart",
@@ -84,11 +86,11 @@ return {
       -- Telekasten highlight groups (reapply on colorscheme change)
       local function apply_tk_highlights()
         local set = vim.api.nvim_set_hl
-        set(0, "tkLink",        { fg = "#4ea4ff", bold = true, underline = true })
+        set(0, "tkLink", { fg = "#4ea4ff", bold = true, underline = true })
         set(0, "tkAliasedLink", { fg = "#a0a0a0" })
-        set(0, "tkBrackets",    { fg = "#888888" })
-        set(0, "tkTag",         { fg = "#c0a000", bold = true })
-        set(0, "tkHighlight",   { bg = "#333333", bold = true })
+        set(0, "tkBrackets", { fg = "#888888" })
+        set(0, "tkTag", { fg = "#c0a000", bold = true })
+        set(0, "tkHighlight", { bg = "#333333", bold = true })
         -- Optional: calendar navigation button
         pcall(set, 0, "CalNavi", { fg = "#4ea4ff", bold = true })
       end

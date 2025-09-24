@@ -1,9 +1,7 @@
 ---
 title: "{{date}}"
 uuid: "{{uuid}}"
-tags:
-  - daily
-  - stage/log
+tags: [daily, stage/log]
 aliases:
   - 
 ---
@@ -14,11 +12,20 @@ aliases:
 
 ---
 ## ✅ Tasks
-- [ ] 
+
+### Scheduled
+- [ ]
+
+### Ad-Hoc
 
 ---
 ## 📝 Log
 * **{{time24}}** - 
+
+## 🔄 Review & Tomorrow
+- [ ] Review today's progress
+- [ ] Add todos for tomorrow
+- [ ] Plan tomorrow's priorities
 
 ## ▲ Links
 - 

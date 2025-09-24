@@ -272,7 +272,7 @@ Benefits:
 
 ### Directory Structure
 ```
-~/Dropbox/Apps/zettelkasten/
+~/zettelkasten/
 ├── daily/           # Daily notes (YYYY-MM-DD.md)
 ├── weekly/          # Weekly notes
 ├── monthly/         # Monthly notes
@@ -300,7 +300,7 @@ export LOGSEQ_HOME="/path/to/your/logseq/vault"
 ```
 
 ### Custom Templates
-Templates are located in `~/Dropbox/Apps/zettelkasten/templates/`:
+Templates are located in `~/zettelkasten/templates/`:
 - `daily.md` - Daily note template
 - `weekly.md` - Weekly note template
 - `monthly.md` - Monthly note template
@@ -331,12 +331,12 @@ For a complete list, run `:h telekasten.template_files` in Neovim.
 
 ### Daily Note Not Loading Template
 1. Check if a blank daily note already exists
-2. Delete the blank file: `rm ~/Dropbox/Apps/zettelkasten/daily/YYYY-MM-DD.md`
+2. Delete the blank file: `rm ~/zettelkasten/daily/YYYY-MM-DD.md`
 3. Try `<space>zd` again
 
 ### Templates Not Found
 1. Run the setup script: `./nvim/scripts/setup.sh`
-2. Check templates exist: `ls ~/Dropbox/Apps/zettelkasten/templates/`
+2. Check templates exist: `ls ~/zettelkasten/templates/`
 
 ### LSP Errors
 - Ensure marksman is installed: `brew install marksman`
@@ -389,7 +389,7 @@ For a complete list, run `:h telekasten.template_files` in Neovim.
 ### Finding Content in Logseq
 1. **Change to Logseq directory**:
    ```vim
-   :cd ~/Dropbox/Apps/Logseq
+   :cd ~/logseq
    ```
    (Adjust path to your Logseq vault)
 

@@ -33,11 +33,55 @@ return {
 
   -- Telescope and dependencies
   { "nvim-lua/plenary.nvim", lazy = true },
-  { "nvim-telescope/telescope.nvim", version = "0.1.*", cmd = "Telescope" },
+  {
+    "nvim-telescope/telescope.nvim",
+    version = "0.1.*",
+    cmd = "Telescope",
+    config = function()
+      local telescope = require("telescope")
+      local actions = require("telescope.actions")
+
+      telescope.setup({
+        defaults = {
+          mappings = {
+            i = {
+              ["<C-j>"] = actions.move_selection_next,
+              ["<C-k>"] = actions.move_selection_previous,
+              ["<C-n>"] = actions.move_selection_next,
+              ["<C-p>"] = actions.move_selection_previous,
+              ["<C-c>"] = actions.close,
+              ["<CR>"] = actions.select_default,
+              ["<C-x>"] = actions.select_horizontal,
+              ["<C-v>"] = actions.select_vertical,
+              ["<C-t>"] = actions.select_tab,
+            },
+            n = {
+              ["<C-j>"] = actions.move_selection_next,
+              ["<C-k>"] = actions.move_selection_previous,
+              ["<C-n>"] = actions.move_selection_next,
+              ["<C-p>"] = actions.move_selection_previous,
+              ["<C-c>"] = actions.close,
+              ["<CR>"] = actions.select_default,
+              ["<C-x>"] = actions.select_horizontal,
+              ["<C-v>"] = actions.select_vertical,
+              ["<C-t>"] = actions.select_tab,
+            },
+          },
+        },
+      })
+    end,
+  },
   {
     "nvim-telescope/telescope-fzf-native.nvim",
     build = "make",
     cond = vim.fn.executable("make") == 1,
+  },
+  {
+    "nvim-telescope/telescope-frecency.nvim",
+    dependencies = { "tami5/sqlite.lua" },
+  },
+  {
+    "nvim-telescope/telescope-live-grep-args.nvim",
   },
 
   -- Diagnostics list

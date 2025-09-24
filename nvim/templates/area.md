@@ -1,9 +1,7 @@
 ---
 title: "{{shorttitle}}"
 uuid: "{{uuid}}"
-tags:
-  - area
-  - status/active
+tags: [area, status/active]
 aliases:
   - 
 ---

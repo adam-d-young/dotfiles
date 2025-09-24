@@ -1,8 +1,7 @@
 ---
 title: "{{shorttitle}}"
 uuid: "{{uuid}}"
-tags:
-  - stage/seed
+tags: [stage/seed]
 aliases:
   - 
 ---

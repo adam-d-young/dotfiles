@@ -1,9 +1,7 @@
 ---
 title: "Project: {{shorttitle}}"
 uuid: "{{uuid}}"
-tags:
-  - project
-  - status/active
+tags: [project, status/active]
 aliases:
   - 
 ---
