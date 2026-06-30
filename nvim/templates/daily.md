@@ -22,6 +22,9 @@ aliases:
 ## 📝 Log
 * **{{time24}}** - 
 
+## 🌱 Seeds & Notes
+* 
+
 ## 🔄 Review & Tomorrow
 - [ ] Review today's progress
 - [ ] Add todos for tomorrow

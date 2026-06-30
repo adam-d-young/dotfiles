@@ -3,12 +3,16 @@ local map = function(mode, lhs, rhs, desc)
   vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
 end
 
-
-
 -- Quality-of-life
 map("n", "<leader>w", ":w<CR>", "Write buffer")
 map("n", "<leader>q", ":q<CR>", "Quit window")
 map("n", "<leader>h", ":nohlsearch<CR>", "Clear search highlight")
+
+-- Visual line movement (j/k move by visual lines when wrap is on)
+map("n", "j", "gj", "Move down by visual line")
+map("n", "k", "gk", "Move up by visual line")
+map("v", "j", "gj", "Move down by visual line")
+map("v", "k", "gk", "Move up by visual line")
 
 -- Telescope
 map("n", "<leader>ff", function()
@@ -302,12 +306,6 @@ map("n", "<leader>zl", function()
     tk.insert_link()
   end
 end, "Telekasten: insert link")
-map("n", "<leader>zi", function()
-  local ok, tk = pcall(require, "telekasten")
-  if ok then
-    tk.insert_link()
-  end
-end, "Telekasten: insert link")
 
 -- Telekasten: follow link under cursor (creates if missing)
 map("n", "<leader>zf", function()
@@ -324,6 +322,27 @@ map("n", "<leader>zv", function()
     tk.follow_link()
   end
 end, "Telekasten: follow link (vertical split)")
+
+-- Insert external link (URL)
+map("n", "<leader>zu", function()
+  vim.ui.input({ prompt = "URL: " }, function(url)
+    if not url or url == "" then
+      return
+    end
+    vim.ui.input({ prompt = "Link text: " }, function(text)
+      if not text or text == "" then
+        text = url
+      end
+      local link = "[" .. text .. "](" .. url .. ")"
+      vim.api.nvim_put({ link }, "c", true, true)
+    end)
+  end)
+end, "Telekasten: insert external link")
+
+-- Link management shortcuts
+map("n", "<leader>lo", ":LinkOpen<CR>", "Open reference link under cursor")
+map("n", "<leader>lj", ":LinkJump<CR>", "Jump between reference link and URL")
+map("n", "<leader>lp", ":LinkPeek<CR>", "Preview reference link")
 
 -- Telekasten templates
 map("n", "<leader>zw", function()

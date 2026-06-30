@@ -1,10 +1,46 @@
 return {
+  -- Treesitter (core syntax highlighting)
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {
+      highlight = {
+        enable = true,
+        -- Disable treesitter for markdown, let Neovim's built-in syntax handle it
+        -- disable = { "markdown" },
+        additional_vim_regex_highlighting = false,
+      },
+      indent = { enable = true },
+      auto_install = true,
+      ensure_installed = { "markdown", "markdown_inline", "lua", "vim", "vimdoc", "yaml", "python", "bash" },
+    },
+    config = function(_, opts)
+      require("nvim-treesitter.configs").setup(opts)
+    end,
+  },
+
   -- Colorscheme
   {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-    opts = { style = "moon", transparent = false },
+    opts = {
+      style = "moon",
+      transparent = false,
+      -- Ensure proper markdown highlighting
+      styles = {
+        comments = { italic = true },
+        keywords = { italic = true },
+        functions = {},
+        variables = {},
+      },
+      sidebars = { "qf", "help", "neo-tree" },
+      day_brightness = 0.3,
+      hide_inactive_statusline = true,
+      dim_inactive = false,
+      lualine_bold = false,
+    },
     config = function(_, opts)
       require("tokyonight").setup(opts)
       vim.cmd.colorscheme("tokyonight")

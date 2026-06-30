@@ -12,7 +12,7 @@ opt.shiftwidth = 2
 opt.tabstop = 2
 opt.smartindent = true
 
-opt.wrap = false
+opt.wrap = true
 opt.scrolloff = 4
 opt.sidescrolloff = 8
 
@@ -32,3 +32,10 @@ opt.completeopt = { "menu", "menuone", "noselect" }
 -- Respect modelines but keep it safe
 opt.modeline = true
 opt.modelines = 1
+
+-- Fix emoji cutoff in Neovide
+if vim.g.neovide then
+  vim.g.neovide_line_height = 1.2
+end
+
+-- Let vim-markdown and tokyonight work together naturally

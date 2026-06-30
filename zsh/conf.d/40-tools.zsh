@@ -7,4 +7,5 @@
 command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
 
 # starship — the prompt (git status, dirs, language versions, etc.).
+export STARSHIP_CONFIG="$ZSH_CONFIG_DIR/starship.toml"
 command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
