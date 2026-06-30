@@ -1,0 +1,9 @@
+# zsh "Full modern" local shell stack. Install with: brew bundle --file=Brewfile
+brew "zsh-autosuggestions"           # ghost text (inline history suggestions)
+brew "zsh-fast-syntax-highlighting"  # live command syntax highlighting (modern F-Sy-H)
+brew "fzf"                           # fuzzy finder (Ctrl-T / Alt-C; powers fzf-tab)
+brew "fzf-tab"                       # fuzzy interactive Tab-completion menu
+brew "atuin"                         # searchable shell history (Ctrl-R)
+brew "starship"                      # the prompt
+brew "zoxide"                        # smarter cd (`z`)
+brew "ripgrep"                       # fast content search (`rg`); fzf's file source

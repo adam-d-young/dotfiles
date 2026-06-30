@@ -1,0 +1,44 @@
+#!/usr/bin/env zsh
+# Interactive zsh configuration (Full-modern local stack).
+#
+# Lives in the dotfiles repo at zsh/zshrc; ~/.zshrc is a symlink to this file
+# (see zsh/scripts/setup.sh). Machine-local, un-versioned overrides go in
+# ~/.zshrc.local, which is sourced near the end.
+#
+# Layout: conf.d/*.zsh are sourced in numeric order for the bulk of the config,
+# then a small ORDER-SENSITIVE tail runs last:
+#   autosuggestions -> fast-syntax-highlighting -> atuin
+# (highlighting must wrap the final buffer; atuin rebinds Ctrl-R, so it's dead last).
+
+# --- locate this config's own dir, resolving through the ~/.zshrc symlink ---
+ZSH_CONFIG_DIR="${${(%):-%x}:A:h}"
+
+# --- Homebrew environment (provides the plugins + tools below) ---
+if [[ -z "${HOMEBREW_PREFIX:-}" ]]; then
+  for _b in /home/linuxbrew/.linuxbrew/bin/brew /opt/homebrew/bin/brew /usr/local/bin/brew; do
+    [[ -x "$_b" ]] && eval "$("$_b" shellenv)" && break
+  done
+  unset _b
+fi
+
+# --- modular config: options, history, ghost-text vars, completion+fzf-tab, fzf, tools, aliases ---
+for _f in "$ZSH_CONFIG_DIR"/conf.d/*.zsh(N); do
+  source "$_f"
+done
+unset _f
+
+# --- machine-local overrides (not version-controlled) ---
+[[ -r "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+
+# --- ORDER-SENSITIVE tail: must run after all widgets/keybindings are defined ---
+
+# 1) ghost text — inline history suggestions (config vars set in conf.d/15)
+[[ -r "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] \
+  && source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+# 2) syntax highlighting — fast-syntax-highlighting; the LAST plugin to wrap the buffer
+[[ -r "$HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" ]] \
+  && source "$HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+
+# 3) atuin — searchable shell history; rebinds Ctrl-R, so initialize it dead last
+command -v atuin >/dev/null 2>&1 && eval "$(atuin init zsh)"
